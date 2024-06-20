@@ -34,6 +34,9 @@ const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 const plane = new THREE.Mesh(planetGeometry, planeMaterial);
 scene.add(plane);
 
+const gridHelper = new THREE.GridHelper();
+scene.add(gridHelper);
+
 function animate(time) {
   box.rotation.x = time / 1000;
   box.rotation.y = time / 1000;
