@@ -1,5 +1,5 @@
-1095
-64C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\dist133633157070786062 1
+1115
+64C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\dist133633163620151565 1
 103C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\extras\core\Shape.js133632308953792307 0
 115C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\BokehShader2.js133632308942835665 0
 117C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\PassNode.js133632308952106423 0
@@ -9,16 +9,18 @@
 123C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\parsers\GLSLNodeParser.js133632308947065505 0
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\OBJLoader.js133632308951459218 0
 94C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\build\three.cjs133632308941240622 0
-72C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules133632308958760183 1
-72C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\package.json133632308958700268 0
-91C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\.package-lock.json133632308958770238 0
+72C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules133633158256904798 1
+72C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\package.json133633158259798520 0
+91C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\.package-lock.json133633158259848719 0
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\PLYLoader.js133632308952282515 0
+91C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js\index.js133633158259455388 0
 93C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\geometries133632308956739007 1
+90C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js\LICENSE133633158259455388 0
 90C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\cameras133632308954302024 1
 134C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\accessors\ModelViewProjectionNode.js133632308950634980 0
 115C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\LogLuvLoader.js133632308949094238 0
 117C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\core\InstancedInterleavedBuffer.js133632308947629705 0
-77C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\package-lock.json133632308958750110 0
+77C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\package-lock.json133633158259848719 0
 121C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\animation\tracks\ColorKeyframeTrack.js133632308944114172 0
 113C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\WebGLRenderTarget.js133632308956357780 0
 89C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\scenes133632308953453493 1
@@ -29,7 +31,7 @@
 106C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\objects\LineSegments.js133632308948934158 0
 74C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\src\index.html133632399615787416 0
 139C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\shaders\ShaderChunk\morphtarget_vertex.glsl.js133632308950730767 0
-76C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\src\js\script.js133633157056698205 0
+76C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\src\js\script.js133633163618458490 0
 98C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\webgl133632308956505202 1
 134C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\webgl\utils\WebGLCapabilities.js133632308956097007 0
 98C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\math\Frustum.js133632308946760252 0
@@ -277,6 +279,7 @@
 146C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\shaders\ShaderChunk\lights_toon_pars_fragment.glsl.js133632308948414138 0
 129C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\shaders\ShaderLib\meshnormal.glsl.js133632308950189118 0
 149C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\functions\BSDF\V_GGX_SmithCorrelated_Anisotropic.js133632308955517609 0
+90C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer\index.d.ts133633158259656049 0
 131C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\shaders\ShaderLib\meshphysical.glsl.js133632308950304860 0
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\libs\tween.module.js133632308955230115 0
 122C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\common\Background.js133632308942528990 0
@@ -444,6 +447,7 @@
 121C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\materialx\DISCLAIMER.md133632308957766244 0
 125C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\webxr\XRControllerModelFactory.js133632308956781428 0
 103C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\math\Lut.js133632308949378951 0
+89C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\ieee754\index.js133633158257849162 0
 104C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\cameras\CubeCamera.js133632308944837275 0
 116C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\pmrem\PMREMNode.js133632308952353909 0
 139C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\renderers\shaders\ShaderChunk\morphnormal_vertex.glsl.js133632308950700796 0
@@ -566,6 +570,7 @@
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\materials\MeshToonMaterial.js133632308950421855 0
 120C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\accessors\SceneNode.js133632308953471054 0
 110C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\materials\ShadowMaterial.js133632308953738089 0
+87C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer\LICENSE133633158259455388 0
 109C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\objects\Water2.js133632308955936725 0
 105C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\cameras\ArrayCamera.js133632308942260401 0
 110C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\src\materials\SpriteMaterial.js133632308954171010 0
@@ -682,7 +687,7 @@
 117C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\HalftoneShader.js133632308947354873 0
 97C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\lines133632308956739007 1
 110C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\utils\SortUtils.js133632308954020769 0
-86C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\dist\index.e82f28a0.js.map133633157070756289 0
+86C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\dist\index.e82f28a0.js.map133633163620116518 0
 122C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\helpers\VertexNormalsHelper.js133632308955617720 0
 101C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\modifiers133632308954590843 1
 114C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\lights\IESSpotLight.js133632308947499049 0
@@ -722,6 +727,7 @@
 117C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\postprocessing\SSRPass.js133632308954256840 0
 128C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\HorizontalTiltShiftShader.js133632308947429057 0
 122C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\HueSaturationShader.js133632308947469039 0
+98C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js\base64js.min.js133633158259455388 0
 118C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\NormalMapShader.js133632308951223793 0
 115C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\OutputShader.js133632308951969162 0
 123C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\shaders\PoissonDenoiseShader.js133632308952471074 0
@@ -748,6 +754,7 @@
 125C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\webgpu\WebGPUBackend.js133632308956555115 0
 105C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\parsers133632308947065505 1
 119C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\utils\MatcapUVNode.js133632308949668951 0
+88C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\ieee754\LICENSE133633158257849162 0
 119C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\controls\ArcballControls.js133632308942210656 0
 126C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\webgpu\WebGPURenderer.js133632308956608845 0
 138C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\webgpu\utils\WebGPUAttributeUtils.js133632308956535184 0
@@ -805,6 +812,7 @@
 134C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\common\nodes\NodeBuilderState.js133632308950877668 0
 123C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\common\nodes\Nodes.js133632308951013647 0
 123C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\AnamorphicNode.js133632308941860696 0
+90C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\ieee754\README.md133633158257965397 0
 119C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\lighting\LightNode.js133632308948078717 0
 136C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\renderers\common\nodes\NodeSampledTexture.js133632308951023655 0
 103C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\pmrem133632308952363883 1
@@ -944,6 +952,7 @@
 128C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\ColorAdjustmentNode.js133632308944064148 0
 115C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\core\NodeCache.js133632308950887699 0
 123C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\ColorSpaceNode.js133632308944184250 0
+82C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js133633158259548983 1
 125C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\GaussianBlurNode.js133632308946815494 0
 124C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\ToneMappingNode.js133632308955016124 0
 126C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\nodes\display\ViewportDepthNode.js133632308955701494 0
@@ -1011,6 +1020,7 @@
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\PVRLoader.js133632308952667115 0
 113C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\FontLoader.js133632308946722580 0
 113C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\GLTFLoader.js133632308947210006 0
+95C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js\package.json133633158259548983 0
 123C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\HDRCubeTextureLoader.js133632308947384858 0
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\KTXLoader.js133632308947916933 0
 114C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\loaders\LDrawLoader.js133632308947968707 0
@@ -1069,6 +1079,7 @@
 106C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\fonts\droid\NOTICE133632308940794223 0
 115C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\effects\StereoEffect.js133632308954322019 0
 113C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\curves\CurveExtras.js133632308945025309 0
+90C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer\AUTHORS.md133633158259656049 0
 114C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\curves\NURBSSurface.js133632308951309201 0
 112C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\curves\NURBSUtils.js133632308951329163 0
 109C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\jsm\csm\CSMFrustum.js133632308944637258 0
@@ -1093,4 +1104,13 @@
 129C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\fonts\droid\droid_sans_bold.typeface.json133632308957038499 0
 132C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\examples\fonts\droid\droid_sans_regular.typeface.json133632308957171029 0
 104C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\three\build\three.module.min.js133632308954930182 0
-82C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\dist\index.e82f28a0.js133633157070676086 0
+80C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\ieee754133633158257975534 1
+79C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer133633158259656049 1
+93C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\ieee754\package.json133633158257849162 0
+91C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\ieee754\index.d.ts133633158257978028 0
+88C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer\index.js133633158259548983 0
+92C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js\README.md133633158259548983 0
+93C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\base64-js\index.d.ts133633158259548983 0
+92C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer\package.json133633158259627136 0
+89C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\node_modules\buffer\README.md133633158259656049 0
+82C:\Users\Ryzen 5\Documents\GitHub\TreeJS_para_principiantes\dist\index.e82f28a0.js133633163620021081 0
