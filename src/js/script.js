@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
+import * as dat from "dat.gui";
 
 const renderer = new THREE.WebGLRenderer();
 
@@ -25,17 +26,41 @@ camera.position.set(-10, 30, 30); //x, y, z
 orbit.update();
 
 const boxGeometry = new THREE.BoxGeometry();
-const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const boxMaterial = new THREE.MeshBasicMaterial({
+  color: 0x00ff00,
+});
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
 scene.add(box);
 
 const planetGeometry = new THREE.PlaneGeometry(30, 30);
-const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const planeMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  side: THREE.DoubleSide,
+});
 const plane = new THREE.Mesh(planetGeometry, planeMaterial);
 scene.add(plane);
+plane.rotation.x = -0.5 * Math.PI;
 
-const gridHelper = new THREE.GridHelper();
+const gridHelper = new THREE.GridHelper(30);
 scene.add(gridHelper);
+
+const sphereGeometry = new THREE.SphereGeometry(4, 50, 50);
+const sphereMaterial = new THREE.MeshBasicMaterial({
+  color: 0x0000ff,
+  wireframe: true,
+});
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+scene.add(sphere);
+
+sphere.position.set(-10, 10, 0);
+
+const gui = new dat.GUI();
+
+const options = {
+  sphereColor: "#ffea00",
+};
+
+gui.addColor(options, "sphereColor").onChange(function (e) {});
 
 function animate(time) {
   box.rotation.x = time / 1000;
