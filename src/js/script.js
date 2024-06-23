@@ -45,14 +45,24 @@ const gridHelper = new THREE.GridHelper(30);
 scene.add(gridHelper);
 
 const sphereGeometry = new THREE.SphereGeometry(4, 50, 50);
-const sphereMaterial = new THREE.MeshBasicMaterial({
+const sphereMaterial = new THREE.MeshStandardMaterial({
   color: 0x0000ff,
-  wireframe: true,
+  wireframe: false,
 });
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 scene.add(sphere);
-
 sphere.position.set(-10, 10, 0);
+
+//Ligth
+const ambientLight = new THREE.AmbientLight(0x333333);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+scene.add(directionalLight);
+directionalLight.position.set(-30, 50, 0);
+
+const dLightHelper = new THREE.DirectionalLightHelper(directionalLight);
+scene.add(dLightHelper);
 
 const gui = new dat.GUI();
 

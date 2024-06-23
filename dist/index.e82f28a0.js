@@ -614,13 +614,21 @@ plane.rotation.x = -0.5 * Math.PI;
 const gridHelper = new _three.GridHelper(30);
 scene.add(gridHelper);
 const sphereGeometry = new _three.SphereGeometry(4, 50, 50);
-const sphereMaterial = new _three.MeshBasicMaterial({
+const sphereMaterial = new _three.MeshStandardMaterial({
     color: 0x0000ff,
-    wireframe: true
+    wireframe: false
 });
 const sphere = new _three.Mesh(sphereGeometry, sphereMaterial);
 scene.add(sphere);
 sphere.position.set(-10, 10, 0);
+//Ligth
+const ambientLight = new _three.AmbientLight(0x333333);
+scene.add(ambientLight);
+const directionalLight = new _three.DirectionalLight(0xffffff, 0.8);
+scene.add(directionalLight);
+directionalLight.position.set(-30, 50, 0);
+const dLightHelper = new _three.DirectionalLightHelper(directionalLight);
+scene.add(dLightHelper);
 const gui = new _datGui.GUI();
 const options = {
     sphereColor: "#ffea00",
