@@ -24,22 +24,20 @@ const orbit = new OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
-camera.position.set(-10, 30, 30); //x, y, z
+camera.position.set(-10, 30, 30);
 orbit.update();
 
 const boxGeometry = new THREE.BoxGeometry();
-const boxMaterial = new THREE.MeshBasicMaterial({
-  color: 0x00ff00,
-});
+const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
 scene.add(box);
 
-const planetGeometry = new THREE.PlaneGeometry(30, 30);
+const planeGeometry = new THREE.PlaneGeometry(30, 30);
 const planeMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,
   side: THREE.DoubleSide,
 });
-const plane = new THREE.Mesh(planetGeometry, planeMaterial);
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(plane);
 plane.rotation.x = -0.5 * Math.PI;
 plane.receiveShadow = true;
@@ -57,8 +55,7 @@ scene.add(sphere);
 sphere.position.set(-10, 10, 0);
 sphere.castShadow = true;
 
-//Ligth
-const ambientLight = new THREE.AmbientLight(0x333333);
+const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(ambientLight);
 
 // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -75,6 +72,14 @@ scene.add(ambientLight);
 // );
 // scene.add(dLightShadowHelper);
 
+const spotLight = new THREE.SpotLight(0xffffff);
+scene.add(spotLight);
+spotLight.position.set(-100, 100, 0);
+spotLight.castShadow = true;
+
+const sLightHelper = new THREE.SpotLightHelper(spotLight);
+scene.add(sLightHelper);
+
 const gui = new dat.GUI();
 
 const options = {
@@ -87,11 +92,11 @@ gui.addColor(options, "sphereColor").onChange(function (e) {
   sphere.material.color.set(e);
 });
 
-gui.add(options, "wireframe").onChange((e) => {
+gui.add(options, "wireframe").onChange(function (e) {
   sphere.material.wireframe = e;
 });
 
-gui.add(options, "speed", 0, 0.01);
+gui.add(options, "speed", 0, 0.1);
 
 let step = 0;
 // let speed = 0.01;

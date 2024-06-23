@@ -596,7 +596,7 @@ const camera = new _three.PerspectiveCamera(45, window.innerWidth / window.inner
 const orbit = new (0, _addonsJs.OrbitControls)(camera, renderer.domElement);
 const axesHelper = new _three.AxesHelper(5);
 scene.add(axesHelper);
-camera.position.set(-10, 30, 30); //x, y, z
+camera.position.set(-10, 30, 30);
 orbit.update();
 const boxGeometry = new _three.BoxGeometry();
 const boxMaterial = new _three.MeshBasicMaterial({
@@ -604,12 +604,12 @@ const boxMaterial = new _three.MeshBasicMaterial({
 });
 const box = new _three.Mesh(boxGeometry, boxMaterial);
 scene.add(box);
-const planetGeometry = new _three.PlaneGeometry(30, 30);
+const planeGeometry = new _three.PlaneGeometry(30, 30);
 const planeMaterial = new _three.MeshStandardMaterial({
     color: 0xffffff,
     side: _three.DoubleSide
 });
-const plane = new _three.Mesh(planetGeometry, planeMaterial);
+const plane = new _three.Mesh(planeGeometry, planeMaterial);
 scene.add(plane);
 plane.rotation.x = -0.5 * Math.PI;
 plane.receiveShadow = true;
@@ -624,8 +624,7 @@ const sphere = new _three.Mesh(sphereGeometry, sphereMaterial);
 scene.add(sphere);
 sphere.position.set(-10, 10, 0);
 sphere.castShadow = true;
-//Ligth
-const ambientLight = new _three.AmbientLight(0x333333);
+const ambientLight = new _three.AmbientLight(0xffffff);
 scene.add(ambientLight);
 // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 // scene.add(directionalLight);
@@ -638,6 +637,12 @@ scene.add(ambientLight);
 //   directionalLight.shadow.camera
 // );
 // scene.add(dLightShadowHelper);
+const spotLight = new _three.SpotLight(0xffffff);
+scene.add(spotLight);
+spotLight.position.set(-100, 100, 0);
+spotLight.castShadow = true;
+const sLightHelper = new _three.SpotLightHelper(spotLight);
+scene.add(sLightHelper);
 const gui = new _datGui.GUI();
 const options = {
     sphereColor: "#ffea00",
@@ -647,10 +652,10 @@ const options = {
 gui.addColor(options, "sphereColor").onChange(function(e) {
     sphere.material.color.set(e);
 });
-gui.add(options, "wireframe").onChange((e)=>{
+gui.add(options, "wireframe").onChange(function(e) {
     sphere.material.wireframe = e;
 });
-gui.add(options, "speed", 0, 0.01);
+gui.add(options, "speed", 0, 0.1);
 let step = 0;
 // let speed = 0.01;
 function animate(time) {
@@ -662,7 +667,7 @@ function animate(time) {
 }
 renderer.setAnimationLoop(animate);
 
-},{"three":"ktPTu","three/examples/jsm/Addons.js":"iBAni","dat.gui":"k3xQk"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","dat.gui":"k3xQk","three/examples/jsm/Addons.js":"iBAni"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2024 Three.js Authors
@@ -31843,1389 +31848,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"iBAni":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "WebGL", ()=>(0, _webGLJsDefault.default));
-parcelHelpers.export(exports, "Curves", ()=>_curveExtrasJs);
-parcelHelpers.export(exports, "NURBSUtils", ()=>_nurbsutilsJs);
-parcelHelpers.export(exports, "IESSpotLight", ()=>(0, _iesspotLightJsDefault.default));
-parcelHelpers.export(exports, "Water2", ()=>(0, _water2Js.Water));
-parcelHelpers.export(exports, "BokehShader2", ()=>(0, _bokehShader2Js.BokehShader));
-parcelHelpers.export(exports, "BufferGeometryUtils", ()=>_bufferGeometryUtilsJs);
-parcelHelpers.export(exports, "CameraUtils", ()=>_cameraUtilsJs);
-parcelHelpers.export(exports, "GeometryCompressionUtils", ()=>_geometryCompressionUtilsJs);
-parcelHelpers.export(exports, "GeometryUtils", ()=>_geometryUtilsJs);
-parcelHelpers.export(exports, "SceneUtils", ()=>_sceneUtilsJs);
-parcelHelpers.export(exports, "SkeletonUtils", ()=>_skeletonUtilsJs);
-parcelHelpers.export(exports, "SortUtils", ()=>_sortUtilsJs);
-var _animationClipCreatorJs = require("./animation/AnimationClipCreator.js");
-parcelHelpers.exportAll(_animationClipCreatorJs, exports);
-var _ccdiksolverJs = require("./animation/CCDIKSolver.js");
-parcelHelpers.exportAll(_ccdiksolverJs, exports);
-var _mmdanimationHelperJs = require("./animation/MMDAnimationHelper.js");
-parcelHelpers.exportAll(_mmdanimationHelperJs, exports);
-var _mmdphysicsJs = require("./animation/MMDPhysics.js");
-parcelHelpers.exportAll(_mmdphysicsJs, exports);
-var _cinematicCameraJs = require("./cameras/CinematicCamera.js");
-parcelHelpers.exportAll(_cinematicCameraJs, exports);
-var _webGLJs = require("./capabilities/WebGL.js");
-var _webGLJsDefault = parcelHelpers.interopDefault(_webGLJs);
-var _arcballControlsJs = require("./controls/ArcballControls.js");
-parcelHelpers.exportAll(_arcballControlsJs, exports);
-var _dragControlsJs = require("./controls/DragControls.js");
-parcelHelpers.exportAll(_dragControlsJs, exports);
-var _firstPersonControlsJs = require("./controls/FirstPersonControls.js");
-parcelHelpers.exportAll(_firstPersonControlsJs, exports);
-var _flyControlsJs = require("./controls/FlyControls.js");
-parcelHelpers.exportAll(_flyControlsJs, exports);
-var _mapControlsJs = require("./controls/MapControls.js");
-parcelHelpers.exportAll(_mapControlsJs, exports);
-var _orbitControlsJs = require("./controls/OrbitControls.js");
-parcelHelpers.exportAll(_orbitControlsJs, exports);
-var _pointerLockControlsJs = require("./controls/PointerLockControls.js");
-parcelHelpers.exportAll(_pointerLockControlsJs, exports);
-var _trackballControlsJs = require("./controls/TrackballControls.js");
-parcelHelpers.exportAll(_trackballControlsJs, exports);
-var _transformControlsJs = require("./controls/TransformControls.js");
-parcelHelpers.exportAll(_transformControlsJs, exports);
-var _csmJs = require("./csm/CSM.js");
-parcelHelpers.exportAll(_csmJs, exports);
-var _csmfrustumJs = require("./csm/CSMFrustum.js");
-parcelHelpers.exportAll(_csmfrustumJs, exports);
-var _csmhelperJs = require("./csm/CSMHelper.js");
-parcelHelpers.exportAll(_csmhelperJs, exports);
-var _csmshaderJs = require("./csm/CSMShader.js");
-parcelHelpers.exportAll(_csmshaderJs, exports);
-var _curveExtrasJs = require("./curves/CurveExtras.js");
-var _nurbscurveJs = require("./curves/NURBSCurve.js");
-parcelHelpers.exportAll(_nurbscurveJs, exports);
-var _nurbssurfaceJs = require("./curves/NURBSSurface.js");
-parcelHelpers.exportAll(_nurbssurfaceJs, exports);
-var _nurbsvolumeJs = require("./curves/NURBSVolume.js");
-parcelHelpers.exportAll(_nurbsvolumeJs, exports);
-var _nurbsutilsJs = require("./curves/NURBSUtils.js");
-var _anaglyphEffectJs = require("./effects/AnaglyphEffect.js");
-parcelHelpers.exportAll(_anaglyphEffectJs, exports);
-var _asciiEffectJs = require("./effects/AsciiEffect.js");
-parcelHelpers.exportAll(_asciiEffectJs, exports);
-var _outlineEffectJs = require("./effects/OutlineEffect.js");
-parcelHelpers.exportAll(_outlineEffectJs, exports);
-var _parallaxBarrierEffectJs = require("./effects/ParallaxBarrierEffect.js");
-parcelHelpers.exportAll(_parallaxBarrierEffectJs, exports);
-var _peppersGhostEffectJs = require("./effects/PeppersGhostEffect.js");
-parcelHelpers.exportAll(_peppersGhostEffectJs, exports);
-var _stereoEffectJs = require("./effects/StereoEffect.js");
-parcelHelpers.exportAll(_stereoEffectJs, exports);
-var _debugEnvironmentJs = require("./environments/DebugEnvironment.js");
-parcelHelpers.exportAll(_debugEnvironmentJs, exports);
-var _roomEnvironmentJs = require("./environments/RoomEnvironment.js");
-parcelHelpers.exportAll(_roomEnvironmentJs, exports);
-var _dracoexporterJs = require("./exporters/DRACOExporter.js");
-parcelHelpers.exportAll(_dracoexporterJs, exports);
-var _exrexporterJs = require("./exporters/EXRExporter.js");
-parcelHelpers.exportAll(_exrexporterJs, exports);
-var _gltfexporterJs = require("./exporters/GLTFExporter.js");
-parcelHelpers.exportAll(_gltfexporterJs, exports);
-var _ktx2ExporterJs = require("./exporters/KTX2Exporter.js");
-parcelHelpers.exportAll(_ktx2ExporterJs, exports);
-var _mmdexporterJs = require("./exporters/MMDExporter.js");
-parcelHelpers.exportAll(_mmdexporterJs, exports);
-var _objexporterJs = require("./exporters/OBJExporter.js");
-parcelHelpers.exportAll(_objexporterJs, exports);
-var _plyexporterJs = require("./exporters/PLYExporter.js");
-parcelHelpers.exportAll(_plyexporterJs, exports);
-var _stlexporterJs = require("./exporters/STLExporter.js");
-parcelHelpers.exportAll(_stlexporterJs, exports);
-var _usdzexporterJs = require("./exporters/USDZExporter.js");
-parcelHelpers.exportAll(_usdzexporterJs, exports);
-var _boxLineGeometryJs = require("./geometries/BoxLineGeometry.js");
-parcelHelpers.exportAll(_boxLineGeometryJs, exports);
-var _convexGeometryJs = require("./geometries/ConvexGeometry.js");
-parcelHelpers.exportAll(_convexGeometryJs, exports);
-var _decalGeometryJs = require("./geometries/DecalGeometry.js");
-parcelHelpers.exportAll(_decalGeometryJs, exports);
-var _parametricGeometriesJs = require("./geometries/ParametricGeometries.js");
-parcelHelpers.exportAll(_parametricGeometriesJs, exports);
-var _parametricGeometryJs = require("./geometries/ParametricGeometry.js");
-parcelHelpers.exportAll(_parametricGeometryJs, exports);
-var _roundedBoxGeometryJs = require("./geometries/RoundedBoxGeometry.js");
-parcelHelpers.exportAll(_roundedBoxGeometryJs, exports);
-var _teapotGeometryJs = require("./geometries/TeapotGeometry.js");
-parcelHelpers.exportAll(_teapotGeometryJs, exports);
-var _textGeometryJs = require("./geometries/TextGeometry.js");
-parcelHelpers.exportAll(_textGeometryJs, exports);
-var _lightProbeHelperJs = require("./helpers/LightProbeHelper.js");
-parcelHelpers.exportAll(_lightProbeHelperJs, exports);
-var _octreeHelperJs = require("./helpers/OctreeHelper.js");
-parcelHelpers.exportAll(_octreeHelperJs, exports);
-var _positionalAudioHelperJs = require("./helpers/PositionalAudioHelper.js");
-parcelHelpers.exportAll(_positionalAudioHelperJs, exports);
-var _rectAreaLightHelperJs = require("./helpers/RectAreaLightHelper.js");
-parcelHelpers.exportAll(_rectAreaLightHelperJs, exports);
-var _textureHelperJs = require("./helpers/TextureHelper.js");
-parcelHelpers.exportAll(_textureHelperJs, exports);
-var _vertexNormalsHelperJs = require("./helpers/VertexNormalsHelper.js");
-parcelHelpers.exportAll(_vertexNormalsHelperJs, exports);
-var _vertexTangentsHelperJs = require("./helpers/VertexTangentsHelper.js");
-parcelHelpers.exportAll(_vertexTangentsHelperJs, exports);
-var _viewHelperJs = require("./helpers/ViewHelper.js");
-parcelHelpers.exportAll(_viewHelperJs, exports);
-var _htmlmeshJs = require("./interactive/HTMLMesh.js");
-parcelHelpers.exportAll(_htmlmeshJs, exports);
-var _interactiveGroupJs = require("./interactive/InteractiveGroup.js");
-parcelHelpers.exportAll(_interactiveGroupJs, exports);
-var _selectionBoxJs = require("./interactive/SelectionBox.js");
-parcelHelpers.exportAll(_selectionBoxJs, exports);
-var _selectionHelperJs = require("./interactive/SelectionHelper.js");
-parcelHelpers.exportAll(_selectionHelperJs, exports);
-var _iesspotLightJs = require("./lights/IESSpotLight.js");
-var _iesspotLightJsDefault = parcelHelpers.interopDefault(_iesspotLightJs);
-var _lightProbeGeneratorJs = require("./lights/LightProbeGenerator.js");
-parcelHelpers.exportAll(_lightProbeGeneratorJs, exports);
-var _rectAreaLightUniformsLibJs = require("./lights/RectAreaLightUniformsLib.js");
-parcelHelpers.exportAll(_rectAreaLightUniformsLibJs, exports);
-var _line2Js = require("./lines/Line2.js");
-parcelHelpers.exportAll(_line2Js, exports);
-var _lineGeometryJs = require("./lines/LineGeometry.js");
-parcelHelpers.exportAll(_lineGeometryJs, exports);
-var _lineMaterialJs = require("./lines/LineMaterial.js");
-parcelHelpers.exportAll(_lineMaterialJs, exports);
-var _lineSegments2Js = require("./lines/LineSegments2.js");
-parcelHelpers.exportAll(_lineSegments2Js, exports);
-var _lineSegmentsGeometryJs = require("./lines/LineSegmentsGeometry.js");
-parcelHelpers.exportAll(_lineSegmentsGeometryJs, exports);
-var _wireframeJs = require("./lines/Wireframe.js");
-parcelHelpers.exportAll(_wireframeJs, exports);
-var _wireframeGeometry2Js = require("./lines/WireframeGeometry2.js");
-parcelHelpers.exportAll(_wireframeGeometry2Js, exports);
-var _3DmloaderJs = require("./loaders/3DMLoader.js");
-parcelHelpers.exportAll(_3DmloaderJs, exports);
-var _3MfloaderJs = require("./loaders/3MFLoader.js");
-parcelHelpers.exportAll(_3MfloaderJs, exports);
-var _amfloaderJs = require("./loaders/AMFLoader.js");
-parcelHelpers.exportAll(_amfloaderJs, exports);
-var _bvhloaderJs = require("./loaders/BVHLoader.js");
-parcelHelpers.exportAll(_bvhloaderJs, exports);
-var _colladaLoaderJs = require("./loaders/ColladaLoader.js");
-parcelHelpers.exportAll(_colladaLoaderJs, exports);
-var _ddsloaderJs = require("./loaders/DDSLoader.js");
-parcelHelpers.exportAll(_ddsloaderJs, exports);
-var _dracoloaderJs = require("./loaders/DRACOLoader.js");
-parcelHelpers.exportAll(_dracoloaderJs, exports);
-var _exrloaderJs = require("./loaders/EXRLoader.js");
-parcelHelpers.exportAll(_exrloaderJs, exports);
-var _fbxloaderJs = require("./loaders/FBXLoader.js");
-parcelHelpers.exportAll(_fbxloaderJs, exports);
-var _fontLoaderJs = require("./loaders/FontLoader.js");
-parcelHelpers.exportAll(_fontLoaderJs, exports);
-var _gcodeLoaderJs = require("./loaders/GCodeLoader.js");
-parcelHelpers.exportAll(_gcodeLoaderJs, exports);
-var _gltfloaderJs = require("./loaders/GLTFLoader.js");
-parcelHelpers.exportAll(_gltfloaderJs, exports);
-var _hdrcubeTextureLoaderJs = require("./loaders/HDRCubeTextureLoader.js");
-parcelHelpers.exportAll(_hdrcubeTextureLoaderJs, exports);
-var _iesloaderJs = require("./loaders/IESLoader.js");
-parcelHelpers.exportAll(_iesloaderJs, exports);
-var _kmzloaderJs = require("./loaders/KMZLoader.js");
-parcelHelpers.exportAll(_kmzloaderJs, exports);
-var _ktx2LoaderJs = require("./loaders/KTX2Loader.js");
-parcelHelpers.exportAll(_ktx2LoaderJs, exports);
-var _ktxloaderJs = require("./loaders/KTXLoader.js");
-parcelHelpers.exportAll(_ktxloaderJs, exports);
-var _ldrawLoaderJs = require("./loaders/LDrawLoader.js");
-parcelHelpers.exportAll(_ldrawLoaderJs, exports);
-var _lut3DlLoaderJs = require("./loaders/LUT3dlLoader.js");
-parcelHelpers.exportAll(_lut3DlLoaderJs, exports);
-var _lutcubeLoaderJs = require("./loaders/LUTCubeLoader.js");
-parcelHelpers.exportAll(_lutcubeLoaderJs, exports);
-var _lwoloaderJs = require("./loaders/LWOLoader.js");
-parcelHelpers.exportAll(_lwoloaderJs, exports);
-var _logLuvLoaderJs = require("./loaders/LogLuvLoader.js");
-parcelHelpers.exportAll(_logLuvLoaderJs, exports);
-var _lottieLoaderJs = require("./loaders/LottieLoader.js");
-parcelHelpers.exportAll(_lottieLoaderJs, exports);
-var _md2LoaderJs = require("./loaders/MD2Loader.js");
-parcelHelpers.exportAll(_md2LoaderJs, exports);
-var _mddloaderJs = require("./loaders/MDDLoader.js");
-parcelHelpers.exportAll(_mddloaderJs, exports);
-var _mmdloaderJs = require("./loaders/MMDLoader.js");
-parcelHelpers.exportAll(_mmdloaderJs, exports);
-var _mtlloaderJs = require("./loaders/MTLLoader.js");
-parcelHelpers.exportAll(_mtlloaderJs, exports);
-var _nrrdloaderJs = require("./loaders/NRRDLoader.js");
-parcelHelpers.exportAll(_nrrdloaderJs, exports);
-var _objloaderJs = require("./loaders/OBJLoader.js");
-parcelHelpers.exportAll(_objloaderJs, exports);
-var _pcdloaderJs = require("./loaders/PCDLoader.js");
-parcelHelpers.exportAll(_pcdloaderJs, exports);
-var _pdbloaderJs = require("./loaders/PDBLoader.js");
-parcelHelpers.exportAll(_pdbloaderJs, exports);
-var _plyloaderJs = require("./loaders/PLYLoader.js");
-parcelHelpers.exportAll(_plyloaderJs, exports);
-var _pvrloaderJs = require("./loaders/PVRLoader.js");
-parcelHelpers.exportAll(_pvrloaderJs, exports);
-var _rgbeloaderJs = require("./loaders/RGBELoader.js");
-parcelHelpers.exportAll(_rgbeloaderJs, exports);
-var _rgbmloaderJs = require("./loaders/RGBMLoader.js");
-parcelHelpers.exportAll(_rgbmloaderJs, exports);
-var _stlloaderJs = require("./loaders/STLLoader.js");
-parcelHelpers.exportAll(_stlloaderJs, exports);
-var _svgloaderJs = require("./loaders/SVGLoader.js");
-parcelHelpers.exportAll(_svgloaderJs, exports);
-var _tdsloaderJs = require("./loaders/TDSLoader.js");
-parcelHelpers.exportAll(_tdsloaderJs, exports);
-var _tgaloaderJs = require("./loaders/TGALoader.js");
-parcelHelpers.exportAll(_tgaloaderJs, exports);
-var _tiffloaderJs = require("./loaders/TIFFLoader.js");
-parcelHelpers.exportAll(_tiffloaderJs, exports);
-var _ttfloaderJs = require("./loaders/TTFLoader.js");
-parcelHelpers.exportAll(_ttfloaderJs, exports);
-var _tiltLoaderJs = require("./loaders/TiltLoader.js");
-parcelHelpers.exportAll(_tiltLoaderJs, exports);
-var _usdzloaderJs = require("./loaders/USDZLoader.js");
-parcelHelpers.exportAll(_usdzloaderJs, exports);
-var _voxloaderJs = require("./loaders/VOXLoader.js");
-parcelHelpers.exportAll(_voxloaderJs, exports);
-var _vrmlloaderJs = require("./loaders/VRMLLoader.js");
-parcelHelpers.exportAll(_vrmlloaderJs, exports);
-var _vtkloaderJs = require("./loaders/VTKLoader.js");
-parcelHelpers.exportAll(_vtkloaderJs, exports);
-var _xyzloaderJs = require("./loaders/XYZLoader.js");
-parcelHelpers.exportAll(_xyzloaderJs, exports);
-var _meshGouraudMaterialJs = require("./materials/MeshGouraudMaterial.js");
-parcelHelpers.exportAll(_meshGouraudMaterialJs, exports);
-var _capsuleJs = require("./math/Capsule.js");
-parcelHelpers.exportAll(_capsuleJs, exports);
-var _colorConverterJs = require("./math/ColorConverter.js");
-parcelHelpers.exportAll(_colorConverterJs, exports);
-var _convexHullJs = require("./math/ConvexHull.js");
-parcelHelpers.exportAll(_convexHullJs, exports);
-var _improvedNoiseJs = require("./math/ImprovedNoise.js");
-parcelHelpers.exportAll(_improvedNoiseJs, exports);
-var _lutJs = require("./math/Lut.js");
-parcelHelpers.exportAll(_lutJs, exports);
-var _meshSurfaceSamplerJs = require("./math/MeshSurfaceSampler.js");
-parcelHelpers.exportAll(_meshSurfaceSamplerJs, exports);
-var _obbJs = require("./math/OBB.js");
-parcelHelpers.exportAll(_obbJs, exports);
-var _octreeJs = require("./math/Octree.js");
-parcelHelpers.exportAll(_octreeJs, exports);
-var _simplexNoiseJs = require("./math/SimplexNoise.js");
-parcelHelpers.exportAll(_simplexNoiseJs, exports);
-var _convexObjectBreakerJs = require("./misc/ConvexObjectBreaker.js");
-parcelHelpers.exportAll(_convexObjectBreakerJs, exports);
-var _gpucomputationRendererJs = require("./misc/GPUComputationRenderer.js");
-parcelHelpers.exportAll(_gpucomputationRendererJs, exports);
-var _gyroscopeJs = require("./misc/Gyroscope.js");
-parcelHelpers.exportAll(_gyroscopeJs, exports);
-var _md2CharacterJs = require("./misc/MD2Character.js");
-parcelHelpers.exportAll(_md2CharacterJs, exports);
-var _md2CharacterComplexJs = require("./misc/MD2CharacterComplex.js");
-parcelHelpers.exportAll(_md2CharacterComplexJs, exports);
-var _morphAnimMeshJs = require("./misc/MorphAnimMesh.js");
-parcelHelpers.exportAll(_morphAnimMeshJs, exports);
-var _morphBlendMeshJs = require("./misc/MorphBlendMesh.js");
-parcelHelpers.exportAll(_morphBlendMeshJs, exports);
-var _progressiveLightMapJs = require("./misc/ProgressiveLightMap.js");
-parcelHelpers.exportAll(_progressiveLightMapJs, exports);
-var _rollerCoasterJs = require("./misc/RollerCoaster.js");
-parcelHelpers.exportAll(_rollerCoasterJs, exports);
-var _timerJs = require("./misc/Timer.js");
-parcelHelpers.exportAll(_timerJs, exports);
-var _tubePainterJs = require("./misc/TubePainter.js");
-parcelHelpers.exportAll(_tubePainterJs, exports);
-var _volumeJs = require("./misc/Volume.js");
-parcelHelpers.exportAll(_volumeJs, exports);
-var _volumeSliceJs = require("./misc/VolumeSlice.js");
-parcelHelpers.exportAll(_volumeSliceJs, exports);
-var _curveModifierJs = require("./modifiers/CurveModifier.js");
-parcelHelpers.exportAll(_curveModifierJs, exports);
-var _edgeSplitModifierJs = require("./modifiers/EdgeSplitModifier.js");
-parcelHelpers.exportAll(_edgeSplitModifierJs, exports);
-var _simplifyModifierJs = require("./modifiers/SimplifyModifier.js");
-parcelHelpers.exportAll(_simplifyModifierJs, exports);
-var _tessellateModifierJs = require("./modifiers/TessellateModifier.js");
-parcelHelpers.exportAll(_tessellateModifierJs, exports);
-var _groundedSkyboxJs = require("./objects/GroundedSkybox.js");
-parcelHelpers.exportAll(_groundedSkyboxJs, exports);
-var _lensflareJs = require("./objects/Lensflare.js");
-parcelHelpers.exportAll(_lensflareJs, exports);
-var _marchingCubesJs = require("./objects/MarchingCubes.js");
-parcelHelpers.exportAll(_marchingCubesJs, exports);
-var _reflectorJs = require("./objects/Reflector.js");
-parcelHelpers.exportAll(_reflectorJs, exports);
-var _reflectorForSSRPassJs = require("./objects/ReflectorForSSRPass.js");
-parcelHelpers.exportAll(_reflectorForSSRPassJs, exports);
-var _refractorJs = require("./objects/Refractor.js");
-parcelHelpers.exportAll(_refractorJs, exports);
-var _shadowMeshJs = require("./objects/ShadowMesh.js");
-parcelHelpers.exportAll(_shadowMeshJs, exports);
-var _skyJs = require("./objects/Sky.js");
-parcelHelpers.exportAll(_skyJs, exports);
-var _waterJs = require("./objects/Water.js");
-parcelHelpers.exportAll(_waterJs, exports);
-var _water2Js = require("./objects/Water2.js");
-var _ammoPhysicsJs = require("./physics/AmmoPhysics.js");
-parcelHelpers.exportAll(_ammoPhysicsJs, exports);
-var _rapierPhysicsJs = require("./physics/RapierPhysics.js");
-parcelHelpers.exportAll(_rapierPhysicsJs, exports);
-var _afterimagePassJs = require("./postprocessing/AfterimagePass.js");
-parcelHelpers.exportAll(_afterimagePassJs, exports);
-var _bloomPassJs = require("./postprocessing/BloomPass.js");
-parcelHelpers.exportAll(_bloomPassJs, exports);
-var _bokehPassJs = require("./postprocessing/BokehPass.js");
-parcelHelpers.exportAll(_bokehPassJs, exports);
-var _clearPassJs = require("./postprocessing/ClearPass.js");
-parcelHelpers.exportAll(_clearPassJs, exports);
-var _cubeTexturePassJs = require("./postprocessing/CubeTexturePass.js");
-parcelHelpers.exportAll(_cubeTexturePassJs, exports);
-var _dotScreenPassJs = require("./postprocessing/DotScreenPass.js");
-parcelHelpers.exportAll(_dotScreenPassJs, exports);
-var _effectComposerJs = require("./postprocessing/EffectComposer.js");
-parcelHelpers.exportAll(_effectComposerJs, exports);
-var _filmPassJs = require("./postprocessing/FilmPass.js");
-parcelHelpers.exportAll(_filmPassJs, exports);
-var _glitchPassJs = require("./postprocessing/GlitchPass.js");
-parcelHelpers.exportAll(_glitchPassJs, exports);
-var _gtaopassJs = require("./postprocessing/GTAOPass.js");
-parcelHelpers.exportAll(_gtaopassJs, exports);
-var _halftonePassJs = require("./postprocessing/HalftonePass.js");
-parcelHelpers.exportAll(_halftonePassJs, exports);
-var _lutpassJs = require("./postprocessing/LUTPass.js");
-parcelHelpers.exportAll(_lutpassJs, exports);
-var _maskPassJs = require("./postprocessing/MaskPass.js");
-parcelHelpers.exportAll(_maskPassJs, exports);
-var _outlinePassJs = require("./postprocessing/OutlinePass.js");
-parcelHelpers.exportAll(_outlinePassJs, exports);
-var _outputPassJs = require("./postprocessing/OutputPass.js");
-parcelHelpers.exportAll(_outputPassJs, exports);
-var _passJs = require("./postprocessing/Pass.js");
-parcelHelpers.exportAll(_passJs, exports);
-var _renderPassJs = require("./postprocessing/RenderPass.js");
-parcelHelpers.exportAll(_renderPassJs, exports);
-var _renderPixelatedPassJs = require("./postprocessing/RenderPixelatedPass.js");
-parcelHelpers.exportAll(_renderPixelatedPassJs, exports);
-var _saopassJs = require("./postprocessing/SAOPass.js");
-parcelHelpers.exportAll(_saopassJs, exports);
-var _smaapassJs = require("./postprocessing/SMAAPass.js");
-parcelHelpers.exportAll(_smaapassJs, exports);
-var _ssaarenderPassJs = require("./postprocessing/SSAARenderPass.js");
-parcelHelpers.exportAll(_ssaarenderPassJs, exports);
-var _ssaopassJs = require("./postprocessing/SSAOPass.js");
-parcelHelpers.exportAll(_ssaopassJs, exports);
-var _ssrpassJs = require("./postprocessing/SSRPass.js");
-parcelHelpers.exportAll(_ssrpassJs, exports);
-var _savePassJs = require("./postprocessing/SavePass.js");
-parcelHelpers.exportAll(_savePassJs, exports);
-var _shaderPassJs = require("./postprocessing/ShaderPass.js");
-parcelHelpers.exportAll(_shaderPassJs, exports);
-var _taarenderPassJs = require("./postprocessing/TAARenderPass.js");
-parcelHelpers.exportAll(_taarenderPassJs, exports);
-var _texturePassJs = require("./postprocessing/TexturePass.js");
-parcelHelpers.exportAll(_texturePassJs, exports);
-var _unrealBloomPassJs = require("./postprocessing/UnrealBloomPass.js");
-parcelHelpers.exportAll(_unrealBloomPassJs, exports);
-var _css2DrendererJs = require("./renderers/CSS2DRenderer.js");
-parcelHelpers.exportAll(_css2DrendererJs, exports);
-var _css3DrendererJs = require("./renderers/CSS3DRenderer.js");
-parcelHelpers.exportAll(_css3DrendererJs, exports);
-var _projectorJs = require("./renderers/Projector.js");
-parcelHelpers.exportAll(_projectorJs, exports);
-var _svgrendererJs = require("./renderers/SVGRenderer.js");
-parcelHelpers.exportAll(_svgrendererJs, exports);
-var _acesfilmicToneMappingShaderJs = require("./shaders/ACESFilmicToneMappingShader.js");
-parcelHelpers.exportAll(_acesfilmicToneMappingShaderJs, exports);
-var _afterimageShaderJs = require("./shaders/AfterimageShader.js");
-parcelHelpers.exportAll(_afterimageShaderJs, exports);
-var _basicShaderJs = require("./shaders/BasicShader.js");
-parcelHelpers.exportAll(_basicShaderJs, exports);
-var _bleachBypassShaderJs = require("./shaders/BleachBypassShader.js");
-parcelHelpers.exportAll(_bleachBypassShaderJs, exports);
-var _blendShaderJs = require("./shaders/BlendShader.js");
-parcelHelpers.exportAll(_blendShaderJs, exports);
-var _bokehShaderJs = require("./shaders/BokehShader.js");
-parcelHelpers.exportAll(_bokehShaderJs, exports);
-var _bokehShader2Js = require("./shaders/BokehShader2.js");
-var _brightnessContrastShaderJs = require("./shaders/BrightnessContrastShader.js");
-parcelHelpers.exportAll(_brightnessContrastShaderJs, exports);
-var _colorCorrectionShaderJs = require("./shaders/ColorCorrectionShader.js");
-parcelHelpers.exportAll(_colorCorrectionShaderJs, exports);
-var _colorifyShaderJs = require("./shaders/ColorifyShader.js");
-parcelHelpers.exportAll(_colorifyShaderJs, exports);
-var _convolutionShaderJs = require("./shaders/ConvolutionShader.js");
-parcelHelpers.exportAll(_convolutionShaderJs, exports);
-var _copyShaderJs = require("./shaders/CopyShader.js");
-parcelHelpers.exportAll(_copyShaderJs, exports);
-var _dofmipMapShaderJs = require("./shaders/DOFMipMapShader.js");
-parcelHelpers.exportAll(_dofmipMapShaderJs, exports);
-var _depthLimitedBlurShaderJs = require("./shaders/DepthLimitedBlurShader.js");
-parcelHelpers.exportAll(_depthLimitedBlurShaderJs, exports);
-var _digitalGlitchJs = require("./shaders/DigitalGlitch.js");
-parcelHelpers.exportAll(_digitalGlitchJs, exports);
-var _dotScreenShaderJs = require("./shaders/DotScreenShader.js");
-parcelHelpers.exportAll(_dotScreenShaderJs, exports);
-var _exposureShaderJs = require("./shaders/ExposureShader.js");
-parcelHelpers.exportAll(_exposureShaderJs, exports);
-var _fxaashaderJs = require("./shaders/FXAAShader.js");
-parcelHelpers.exportAll(_fxaashaderJs, exports);
-var _filmShaderJs = require("./shaders/FilmShader.js");
-parcelHelpers.exportAll(_filmShaderJs, exports);
-var _focusShaderJs = require("./shaders/FocusShader.js");
-parcelHelpers.exportAll(_focusShaderJs, exports);
-var _freiChenShaderJs = require("./shaders/FreiChenShader.js");
-parcelHelpers.exportAll(_freiChenShaderJs, exports);
-var _gammaCorrectionShaderJs = require("./shaders/GammaCorrectionShader.js");
-parcelHelpers.exportAll(_gammaCorrectionShaderJs, exports);
-var _godRaysShaderJs = require("./shaders/GodRaysShader.js");
-parcelHelpers.exportAll(_godRaysShaderJs, exports);
-var _gtaoshaderJs = require("./shaders/GTAOShader.js");
-parcelHelpers.exportAll(_gtaoshaderJs, exports);
-var _halftoneShaderJs = require("./shaders/HalftoneShader.js");
-parcelHelpers.exportAll(_halftoneShaderJs, exports);
-var _horizontalBlurShaderJs = require("./shaders/HorizontalBlurShader.js");
-parcelHelpers.exportAll(_horizontalBlurShaderJs, exports);
-var _horizontalTiltShiftShaderJs = require("./shaders/HorizontalTiltShiftShader.js");
-parcelHelpers.exportAll(_horizontalTiltShiftShaderJs, exports);
-var _hueSaturationShaderJs = require("./shaders/HueSaturationShader.js");
-parcelHelpers.exportAll(_hueSaturationShaderJs, exports);
-var _kaleidoShaderJs = require("./shaders/KaleidoShader.js");
-parcelHelpers.exportAll(_kaleidoShaderJs, exports);
-var _luminosityHighPassShaderJs = require("./shaders/LuminosityHighPassShader.js");
-parcelHelpers.exportAll(_luminosityHighPassShaderJs, exports);
-var _luminosityShaderJs = require("./shaders/LuminosityShader.js");
-parcelHelpers.exportAll(_luminosityShaderJs, exports);
-var _mmdtoonShaderJs = require("./shaders/MMDToonShader.js");
-parcelHelpers.exportAll(_mmdtoonShaderJs, exports);
-var _mirrorShaderJs = require("./shaders/MirrorShader.js");
-parcelHelpers.exportAll(_mirrorShaderJs, exports);
-var _normalMapShaderJs = require("./shaders/NormalMapShader.js");
-parcelHelpers.exportAll(_normalMapShaderJs, exports);
-var _outputShaderJs = require("./shaders/OutputShader.js");
-parcelHelpers.exportAll(_outputShaderJs, exports);
-var _rgbshiftShaderJs = require("./shaders/RGBShiftShader.js");
-parcelHelpers.exportAll(_rgbshiftShaderJs, exports);
-var _saoshaderJs = require("./shaders/SAOShader.js");
-parcelHelpers.exportAll(_saoshaderJs, exports);
-var _smaashaderJs = require("./shaders/SMAAShader.js");
-parcelHelpers.exportAll(_smaashaderJs, exports);
-var _ssaoshaderJs = require("./shaders/SSAOShader.js");
-parcelHelpers.exportAll(_ssaoshaderJs, exports);
-var _ssrshaderJs = require("./shaders/SSRShader.js");
-parcelHelpers.exportAll(_ssrshaderJs, exports);
-var _sepiaShaderJs = require("./shaders/SepiaShader.js");
-parcelHelpers.exportAll(_sepiaShaderJs, exports);
-var _sobelOperatorShaderJs = require("./shaders/SobelOperatorShader.js");
-parcelHelpers.exportAll(_sobelOperatorShaderJs, exports);
-var _subsurfaceScatteringShaderJs = require("./shaders/SubsurfaceScatteringShader.js");
-parcelHelpers.exportAll(_subsurfaceScatteringShaderJs, exports);
-var _technicolorShaderJs = require("./shaders/TechnicolorShader.js");
-parcelHelpers.exportAll(_technicolorShaderJs, exports);
-var _toonShaderJs = require("./shaders/ToonShader.js");
-parcelHelpers.exportAll(_toonShaderJs, exports);
-var _triangleBlurShaderJs = require("./shaders/TriangleBlurShader.js");
-parcelHelpers.exportAll(_triangleBlurShaderJs, exports);
-var _unpackDepthRGBAShaderJs = require("./shaders/UnpackDepthRGBAShader.js");
-parcelHelpers.exportAll(_unpackDepthRGBAShaderJs, exports);
-var _velocityShaderJs = require("./shaders/VelocityShader.js");
-parcelHelpers.exportAll(_velocityShaderJs, exports);
-var _verticalBlurShaderJs = require("./shaders/VerticalBlurShader.js");
-parcelHelpers.exportAll(_verticalBlurShaderJs, exports);
-var _verticalTiltShiftShaderJs = require("./shaders/VerticalTiltShiftShader.js");
-parcelHelpers.exportAll(_verticalTiltShiftShaderJs, exports);
-var _vignetteShaderJs = require("./shaders/VignetteShader.js");
-parcelHelpers.exportAll(_vignetteShaderJs, exports);
-var _volumeShaderJs = require("./shaders/VolumeShader.js");
-parcelHelpers.exportAll(_volumeShaderJs, exports);
-var _waterRefractionShaderJs = require("./shaders/WaterRefractionShader.js");
-parcelHelpers.exportAll(_waterRefractionShaderJs, exports);
-var _flakesTextureJs = require("./textures/FlakesTexture.js");
-parcelHelpers.exportAll(_flakesTextureJs, exports);
-var _bufferGeometryUtilsJs = require("./utils/BufferGeometryUtils.js");
-var _cameraUtilsJs = require("./utils/CameraUtils.js");
-var _gpustatsPanelJs = require("./utils/GPUStatsPanel.js");
-parcelHelpers.exportAll(_gpustatsPanelJs, exports);
-var _geometryCompressionUtilsJs = require("./utils/GeometryCompressionUtils.js");
-var _geometryUtilsJs = require("./utils/GeometryUtils.js");
-var _ldrawUtilsJs = require("./utils/LDrawUtils.js");
-parcelHelpers.exportAll(_ldrawUtilsJs, exports);
-var _packedPhongMaterialJs = require("./utils/PackedPhongMaterial.js");
-parcelHelpers.exportAll(_packedPhongMaterialJs, exports);
-var _sceneUtilsJs = require("./utils/SceneUtils.js");
-var _shadowMapViewerJs = require("./utils/ShadowMapViewer.js");
-parcelHelpers.exportAll(_shadowMapViewerJs, exports);
-var _skeletonUtilsJs = require("./utils/SkeletonUtils.js");
-var _sortUtilsJs = require("./utils/SortUtils.js");
-var _textureUtilsJs = require("./utils/TextureUtils.js");
-parcelHelpers.exportAll(_textureUtilsJs, exports);
-var _uvsDebugJs = require("./utils/UVsDebug.js");
-parcelHelpers.exportAll(_uvsDebugJs, exports);
-var _workerPoolJs = require("./utils/WorkerPool.js");
-parcelHelpers.exportAll(_workerPoolJs, exports);
-var _arbuttonJs = require("./webxr/ARButton.js");
-parcelHelpers.exportAll(_arbuttonJs, exports);
-var _oculusHandModelJs = require("./webxr/OculusHandModel.js");
-parcelHelpers.exportAll(_oculusHandModelJs, exports);
-var _oculusHandPointerModelJs = require("./webxr/OculusHandPointerModel.js");
-parcelHelpers.exportAll(_oculusHandPointerModelJs, exports);
-var _text2DJs = require("./webxr/Text2D.js");
-parcelHelpers.exportAll(_text2DJs, exports);
-var _vrbuttonJs = require("./webxr/VRButton.js");
-parcelHelpers.exportAll(_vrbuttonJs, exports);
-var _xrbuttonJs = require("./webxr/XRButton.js");
-parcelHelpers.exportAll(_xrbuttonJs, exports);
-var _xrcontrollerModelFactoryJs = require("./webxr/XRControllerModelFactory.js");
-parcelHelpers.exportAll(_xrcontrollerModelFactoryJs, exports);
-var _xrestimatedLightJs = require("./webxr/XREstimatedLight.js");
-parcelHelpers.exportAll(_xrestimatedLightJs, exports);
-var _xrhandMeshModelJs = require("./webxr/XRHandMeshModel.js");
-parcelHelpers.exportAll(_xrhandMeshModelJs, exports);
-var _xrhandModelFactoryJs = require("./webxr/XRHandModelFactory.js");
-parcelHelpers.exportAll(_xrhandModelFactoryJs, exports);
-var _xrhandPrimitiveModelJs = require("./webxr/XRHandPrimitiveModel.js");
-parcelHelpers.exportAll(_xrhandPrimitiveModelJs, exports);
-var _xrplanesJs = require("./webxr/XRPlanes.js");
-parcelHelpers.exportAll(_xrplanesJs, exports);
-
-},{"./animation/AnimationClipCreator.js":false,"./animation/CCDIKSolver.js":false,"./animation/MMDAnimationHelper.js":false,"./animation/MMDPhysics.js":false,"./cameras/CinematicCamera.js":false,"./capabilities/WebGL.js":false,"./controls/ArcballControls.js":false,"./controls/DragControls.js":false,"./controls/FirstPersonControls.js":false,"./controls/FlyControls.js":false,"./controls/MapControls.js":false,"./controls/OrbitControls.js":"7mqRv","./controls/PointerLockControls.js":false,"./controls/TrackballControls.js":false,"./controls/TransformControls.js":false,"./csm/CSM.js":false,"./csm/CSMFrustum.js":false,"./csm/CSMHelper.js":false,"./csm/CSMShader.js":false,"./curves/CurveExtras.js":false,"./curves/NURBSCurve.js":false,"./curves/NURBSSurface.js":false,"./curves/NURBSVolume.js":false,"./curves/NURBSUtils.js":false,"./effects/AnaglyphEffect.js":false,"./effects/AsciiEffect.js":false,"./effects/OutlineEffect.js":false,"./effects/ParallaxBarrierEffect.js":false,"./effects/PeppersGhostEffect.js":false,"./effects/StereoEffect.js":false,"./environments/DebugEnvironment.js":false,"./environments/RoomEnvironment.js":false,"./exporters/DRACOExporter.js":false,"./exporters/EXRExporter.js":false,"./exporters/GLTFExporter.js":false,"./exporters/KTX2Exporter.js":false,"./exporters/MMDExporter.js":false,"./exporters/OBJExporter.js":false,"./exporters/PLYExporter.js":false,"./exporters/STLExporter.js":false,"./exporters/USDZExporter.js":false,"./geometries/BoxLineGeometry.js":false,"./geometries/ConvexGeometry.js":false,"./geometries/DecalGeometry.js":false,"./geometries/ParametricGeometries.js":false,"./geometries/ParametricGeometry.js":false,"./geometries/RoundedBoxGeometry.js":false,"./geometries/TeapotGeometry.js":false,"./geometries/TextGeometry.js":false,"./helpers/LightProbeHelper.js":false,"./helpers/OctreeHelper.js":false,"./helpers/PositionalAudioHelper.js":false,"./helpers/RectAreaLightHelper.js":false,"./helpers/TextureHelper.js":false,"./helpers/VertexNormalsHelper.js":false,"./helpers/VertexTangentsHelper.js":false,"./helpers/ViewHelper.js":false,"./interactive/HTMLMesh.js":false,"./interactive/InteractiveGroup.js":false,"./interactive/SelectionBox.js":false,"./interactive/SelectionHelper.js":false,"./lights/IESSpotLight.js":false,"./lights/LightProbeGenerator.js":false,"./lights/RectAreaLightUniformsLib.js":false,"./lines/Line2.js":false,"./lines/LineGeometry.js":false,"./lines/LineMaterial.js":false,"./lines/LineSegments2.js":false,"./lines/LineSegmentsGeometry.js":false,"./lines/Wireframe.js":false,"./lines/WireframeGeometry2.js":false,"./loaders/3DMLoader.js":false,"./loaders/3MFLoader.js":false,"./loaders/AMFLoader.js":false,"./loaders/BVHLoader.js":false,"./loaders/ColladaLoader.js":false,"./loaders/DDSLoader.js":false,"./loaders/DRACOLoader.js":false,"./loaders/EXRLoader.js":false,"./loaders/FBXLoader.js":false,"./loaders/FontLoader.js":false,"./loaders/GCodeLoader.js":false,"./loaders/GLTFLoader.js":false,"./loaders/HDRCubeTextureLoader.js":false,"./loaders/IESLoader.js":false,"./loaders/KMZLoader.js":false,"./loaders/KTX2Loader.js":false,"./loaders/KTXLoader.js":false,"./loaders/LDrawLoader.js":false,"./loaders/LUT3dlLoader.js":false,"./loaders/LUTCubeLoader.js":false,"./loaders/LWOLoader.js":false,"./loaders/LogLuvLoader.js":false,"./loaders/LottieLoader.js":false,"./loaders/MD2Loader.js":false,"./loaders/MDDLoader.js":false,"./loaders/MMDLoader.js":false,"./loaders/MTLLoader.js":false,"./loaders/NRRDLoader.js":false,"./loaders/OBJLoader.js":false,"./loaders/PCDLoader.js":false,"./loaders/PDBLoader.js":false,"./loaders/PLYLoader.js":false,"./loaders/PVRLoader.js":false,"./loaders/RGBELoader.js":false,"./loaders/RGBMLoader.js":false,"./loaders/STLLoader.js":false,"./loaders/SVGLoader.js":false,"./loaders/TDSLoader.js":false,"./loaders/TGALoader.js":false,"./loaders/TIFFLoader.js":false,"./loaders/TTFLoader.js":false,"./loaders/TiltLoader.js":false,"./loaders/USDZLoader.js":false,"./loaders/VOXLoader.js":false,"./loaders/VRMLLoader.js":false,"./loaders/VTKLoader.js":false,"./loaders/XYZLoader.js":false,"./materials/MeshGouraudMaterial.js":false,"./math/Capsule.js":false,"./math/ColorConverter.js":false,"./math/ConvexHull.js":false,"./math/ImprovedNoise.js":false,"./math/Lut.js":false,"./math/MeshSurfaceSampler.js":false,"./math/OBB.js":false,"./math/Octree.js":false,"./math/SimplexNoise.js":false,"./misc/ConvexObjectBreaker.js":false,"./misc/GPUComputationRenderer.js":false,"./misc/Gyroscope.js":false,"./misc/MD2Character.js":false,"./misc/MD2CharacterComplex.js":false,"./misc/MorphAnimMesh.js":false,"./misc/MorphBlendMesh.js":false,"./misc/ProgressiveLightMap.js":false,"./misc/RollerCoaster.js":false,"./misc/Timer.js":false,"./misc/TubePainter.js":false,"./misc/Volume.js":false,"./misc/VolumeSlice.js":false,"./modifiers/CurveModifier.js":false,"./modifiers/EdgeSplitModifier.js":false,"./modifiers/SimplifyModifier.js":false,"./modifiers/TessellateModifier.js":false,"./objects/GroundedSkybox.js":false,"./objects/Lensflare.js":false,"./objects/MarchingCubes.js":false,"./objects/Reflector.js":false,"./objects/ReflectorForSSRPass.js":false,"./objects/Refractor.js":false,"./objects/ShadowMesh.js":false,"./objects/Sky.js":false,"./objects/Water.js":false,"./objects/Water2.js":false,"./physics/AmmoPhysics.js":false,"./physics/RapierPhysics.js":false,"./postprocessing/AfterimagePass.js":false,"./postprocessing/BloomPass.js":false,"./postprocessing/BokehPass.js":false,"./postprocessing/ClearPass.js":false,"./postprocessing/CubeTexturePass.js":false,"./postprocessing/DotScreenPass.js":false,"./postprocessing/EffectComposer.js":false,"./postprocessing/FilmPass.js":false,"./postprocessing/GlitchPass.js":false,"./postprocessing/GTAOPass.js":false,"./postprocessing/HalftonePass.js":false,"./postprocessing/LUTPass.js":false,"./postprocessing/MaskPass.js":false,"./postprocessing/OutlinePass.js":false,"./postprocessing/OutputPass.js":false,"./postprocessing/Pass.js":false,"./postprocessing/RenderPass.js":false,"./postprocessing/RenderPixelatedPass.js":false,"./postprocessing/SAOPass.js":false,"./postprocessing/SMAAPass.js":false,"./postprocessing/SSAARenderPass.js":false,"./postprocessing/SSAOPass.js":false,"./postprocessing/SSRPass.js":false,"./postprocessing/SavePass.js":false,"./postprocessing/ShaderPass.js":false,"./postprocessing/TAARenderPass.js":false,"./postprocessing/TexturePass.js":false,"./postprocessing/UnrealBloomPass.js":false,"./renderers/CSS2DRenderer.js":false,"./renderers/CSS3DRenderer.js":false,"./renderers/Projector.js":false,"./renderers/SVGRenderer.js":false,"./shaders/ACESFilmicToneMappingShader.js":false,"./shaders/AfterimageShader.js":false,"./shaders/BasicShader.js":false,"./shaders/BleachBypassShader.js":false,"./shaders/BlendShader.js":false,"./shaders/BokehShader.js":false,"./shaders/BokehShader2.js":false,"./shaders/BrightnessContrastShader.js":false,"./shaders/ColorCorrectionShader.js":false,"./shaders/ColorifyShader.js":false,"./shaders/ConvolutionShader.js":false,"./shaders/CopyShader.js":false,"./shaders/DOFMipMapShader.js":false,"./shaders/DepthLimitedBlurShader.js":false,"./shaders/DigitalGlitch.js":false,"./shaders/DotScreenShader.js":false,"./shaders/ExposureShader.js":false,"./shaders/FXAAShader.js":false,"./shaders/FilmShader.js":false,"./shaders/FocusShader.js":false,"./shaders/FreiChenShader.js":false,"./shaders/GammaCorrectionShader.js":false,"./shaders/GodRaysShader.js":false,"./shaders/GTAOShader.js":false,"./shaders/HalftoneShader.js":false,"./shaders/HorizontalBlurShader.js":false,"./shaders/HorizontalTiltShiftShader.js":false,"./shaders/HueSaturationShader.js":false,"./shaders/KaleidoShader.js":false,"./shaders/LuminosityHighPassShader.js":false,"./shaders/LuminosityShader.js":false,"./shaders/MMDToonShader.js":false,"./shaders/MirrorShader.js":false,"./shaders/NormalMapShader.js":false,"./shaders/OutputShader.js":false,"./shaders/RGBShiftShader.js":false,"./shaders/SAOShader.js":false,"./shaders/SMAAShader.js":false,"./shaders/SSAOShader.js":false,"./shaders/SSRShader.js":false,"./shaders/SepiaShader.js":false,"./shaders/SobelOperatorShader.js":false,"./shaders/SubsurfaceScatteringShader.js":false,"./shaders/TechnicolorShader.js":false,"./shaders/ToonShader.js":false,"./shaders/TriangleBlurShader.js":false,"./shaders/UnpackDepthRGBAShader.js":false,"./shaders/VelocityShader.js":false,"./shaders/VerticalBlurShader.js":false,"./shaders/VerticalTiltShiftShader.js":false,"./shaders/VignetteShader.js":false,"./shaders/VolumeShader.js":false,"./shaders/WaterRefractionShader.js":false,"./textures/FlakesTexture.js":false,"./utils/BufferGeometryUtils.js":false,"./utils/CameraUtils.js":false,"./utils/GPUStatsPanel.js":false,"./utils/GeometryCompressionUtils.js":false,"./utils/GeometryUtils.js":false,"./utils/LDrawUtils.js":false,"./utils/PackedPhongMaterial.js":false,"./utils/SceneUtils.js":false,"./utils/ShadowMapViewer.js":false,"./utils/SkeletonUtils.js":false,"./utils/SortUtils.js":false,"./utils/TextureUtils.js":false,"./utils/UVsDebug.js":false,"./utils/WorkerPool.js":false,"./webxr/ARButton.js":false,"./webxr/OculusHandModel.js":false,"./webxr/OculusHandPointerModel.js":false,"./webxr/Text2D.js":false,"./webxr/VRButton.js":false,"./webxr/XRButton.js":false,"./webxr/XRControllerModelFactory.js":false,"./webxr/XREstimatedLight.js":false,"./webxr/XRHandMeshModel.js":false,"./webxr/XRHandModelFactory.js":false,"./webxr/XRHandPrimitiveModel.js":false,"./webxr/XRPlanes.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"7JQpJ"}],"7mqRv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "OrbitControls", ()=>OrbitControls);
-var _three = require("three");
-// OrbitControls performs orbiting, dollying (zooming), and panning.
-// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
-//
-//    Orbit - left mouse / touch: one-finger move
-//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
-//    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
-const _changeEvent = {
-    type: "change"
-};
-const _startEvent = {
-    type: "start"
-};
-const _endEvent = {
-    type: "end"
-};
-const _ray = new (0, _three.Ray)();
-const _plane = new (0, _three.Plane)();
-const TILT_LIMIT = Math.cos(70 * (0, _three.MathUtils).DEG2RAD);
-class OrbitControls extends (0, _three.EventDispatcher) {
-    constructor(object, domElement){
-        super();
-        this.object = object;
-        this.domElement = domElement;
-        this.domElement.style.touchAction = "none"; // disable touch scroll
-        // Set to false to disable this control
-        this.enabled = true;
-        // "target" sets the location of focus, where the object orbits around
-        this.target = new (0, _three.Vector3)();
-        // Sets the 3D cursor (similar to Blender), from which the maxTargetRadius takes effect
-        this.cursor = new (0, _three.Vector3)();
-        // How far you can dolly in and out ( PerspectiveCamera only )
-        this.minDistance = 0;
-        this.maxDistance = Infinity;
-        // How far you can zoom in and out ( OrthographicCamera only )
-        this.minZoom = 0;
-        this.maxZoom = Infinity;
-        // Limit camera target within a spherical area around the cursor
-        this.minTargetRadius = 0;
-        this.maxTargetRadius = Infinity;
-        // How far you can orbit vertically, upper and lower limits.
-        // Range is 0 to Math.PI radians.
-        this.minPolarAngle = 0; // radians
-        this.maxPolarAngle = Math.PI; // radians
-        // How far you can orbit horizontally, upper and lower limits.
-        // If set, the interval [ min, max ] must be a sub-interval of [ - 2 PI, 2 PI ], with ( max - min < 2 PI )
-        this.minAzimuthAngle = -Infinity; // radians
-        this.maxAzimuthAngle = Infinity; // radians
-        // Set to true to enable damping (inertia)
-        // If damping is enabled, you must call controls.update() in your animation loop
-        this.enableDamping = false;
-        this.dampingFactor = 0.05;
-        // This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
-        // Set to false to disable zooming
-        this.enableZoom = true;
-        this.zoomSpeed = 1.0;
-        // Set to false to disable rotating
-        this.enableRotate = true;
-        this.rotateSpeed = 1.0;
-        // Set to false to disable panning
-        this.enablePan = true;
-        this.panSpeed = 1.0;
-        this.screenSpacePanning = true; // if false, pan orthogonal to world-space direction camera.up
-        this.keyPanSpeed = 7.0; // pixels moved per arrow key push
-        this.zoomToCursor = false;
-        // Set to true to automatically rotate around the target
-        // If auto-rotate is enabled, you must call controls.update() in your animation loop
-        this.autoRotate = false;
-        this.autoRotateSpeed = 2.0; // 30 seconds per orbit when fps is 60
-        // The four arrow keys
-        this.keys = {
-            LEFT: "ArrowLeft",
-            UP: "ArrowUp",
-            RIGHT: "ArrowRight",
-            BOTTOM: "ArrowDown"
-        };
-        // Mouse buttons
-        this.mouseButtons = {
-            LEFT: (0, _three.MOUSE).ROTATE,
-            MIDDLE: (0, _three.MOUSE).DOLLY,
-            RIGHT: (0, _three.MOUSE).PAN
-        };
-        // Touch fingers
-        this.touches = {
-            ONE: (0, _three.TOUCH).ROTATE,
-            TWO: (0, _three.TOUCH).DOLLY_PAN
-        };
-        // for reset
-        this.target0 = this.target.clone();
-        this.position0 = this.object.position.clone();
-        this.zoom0 = this.object.zoom;
-        // the target DOM element for key events
-        this._domElementKeyEvents = null;
-        //
-        // public methods
-        //
-        this.getPolarAngle = function() {
-            return spherical.phi;
-        };
-        this.getAzimuthalAngle = function() {
-            return spherical.theta;
-        };
-        this.getDistance = function() {
-            return this.object.position.distanceTo(this.target);
-        };
-        this.listenToKeyEvents = function(domElement) {
-            domElement.addEventListener("keydown", onKeyDown);
-            this._domElementKeyEvents = domElement;
-        };
-        this.stopListenToKeyEvents = function() {
-            this._domElementKeyEvents.removeEventListener("keydown", onKeyDown);
-            this._domElementKeyEvents = null;
-        };
-        this.saveState = function() {
-            scope.target0.copy(scope.target);
-            scope.position0.copy(scope.object.position);
-            scope.zoom0 = scope.object.zoom;
-        };
-        this.reset = function() {
-            scope.target.copy(scope.target0);
-            scope.object.position.copy(scope.position0);
-            scope.object.zoom = scope.zoom0;
-            scope.object.updateProjectionMatrix();
-            scope.dispatchEvent(_changeEvent);
-            scope.update();
-            state = STATE.NONE;
-        };
-        // this method is exposed, but perhaps it would be better if we can make it private...
-        this.update = function() {
-            const offset = new (0, _three.Vector3)();
-            // so camera.up is the orbit axis
-            const quat = new (0, _three.Quaternion)().setFromUnitVectors(object.up, new (0, _three.Vector3)(0, 1, 0));
-            const quatInverse = quat.clone().invert();
-            const lastPosition = new (0, _three.Vector3)();
-            const lastQuaternion = new (0, _three.Quaternion)();
-            const lastTargetPosition = new (0, _three.Vector3)();
-            const twoPI = 2 * Math.PI;
-            return function update(deltaTime = null) {
-                const position = scope.object.position;
-                offset.copy(position).sub(scope.target);
-                // rotate offset to "y-axis-is-up" space
-                offset.applyQuaternion(quat);
-                // angle from z-axis around y-axis
-                spherical.setFromVector3(offset);
-                if (scope.autoRotate && state === STATE.NONE) rotateLeft(getAutoRotationAngle(deltaTime));
-                if (scope.enableDamping) {
-                    spherical.theta += sphericalDelta.theta * scope.dampingFactor;
-                    spherical.phi += sphericalDelta.phi * scope.dampingFactor;
-                } else {
-                    spherical.theta += sphericalDelta.theta;
-                    spherical.phi += sphericalDelta.phi;
-                }
-                // restrict theta to be between desired limits
-                let min = scope.minAzimuthAngle;
-                let max = scope.maxAzimuthAngle;
-                if (isFinite(min) && isFinite(max)) {
-                    if (min < -Math.PI) min += twoPI;
-                    else if (min > Math.PI) min -= twoPI;
-                    if (max < -Math.PI) max += twoPI;
-                    else if (max > Math.PI) max -= twoPI;
-                    if (min <= max) spherical.theta = Math.max(min, Math.min(max, spherical.theta));
-                    else spherical.theta = spherical.theta > (min + max) / 2 ? Math.max(min, spherical.theta) : Math.min(max, spherical.theta);
-                }
-                // restrict phi to be between desired limits
-                spherical.phi = Math.max(scope.minPolarAngle, Math.min(scope.maxPolarAngle, spherical.phi));
-                spherical.makeSafe();
-                // move target to panned location
-                if (scope.enableDamping === true) scope.target.addScaledVector(panOffset, scope.dampingFactor);
-                else scope.target.add(panOffset);
-                // Limit the target distance from the cursor to create a sphere around the center of interest
-                scope.target.sub(scope.cursor);
-                scope.target.clampLength(scope.minTargetRadius, scope.maxTargetRadius);
-                scope.target.add(scope.cursor);
-                let zoomChanged = false;
-                // adjust the camera position based on zoom only if we're not zooming to the cursor or if it's an ortho camera
-                // we adjust zoom later in these cases
-                if (scope.zoomToCursor && performCursorZoom || scope.object.isOrthographicCamera) spherical.radius = clampDistance(spherical.radius);
-                else {
-                    const prevRadius = spherical.radius;
-                    spherical.radius = clampDistance(spherical.radius * scale);
-                    zoomChanged = prevRadius != spherical.radius;
-                }
-                offset.setFromSpherical(spherical);
-                // rotate offset back to "camera-up-vector-is-up" space
-                offset.applyQuaternion(quatInverse);
-                position.copy(scope.target).add(offset);
-                scope.object.lookAt(scope.target);
-                if (scope.enableDamping === true) {
-                    sphericalDelta.theta *= 1 - scope.dampingFactor;
-                    sphericalDelta.phi *= 1 - scope.dampingFactor;
-                    panOffset.multiplyScalar(1 - scope.dampingFactor);
-                } else {
-                    sphericalDelta.set(0, 0, 0);
-                    panOffset.set(0, 0, 0);
-                }
-                // adjust camera position
-                if (scope.zoomToCursor && performCursorZoom) {
-                    let newRadius = null;
-                    if (scope.object.isPerspectiveCamera) {
-                        // move the camera down the pointer ray
-                        // this method avoids floating point error
-                        const prevRadius = offset.length();
-                        newRadius = clampDistance(prevRadius * scale);
-                        const radiusDelta = prevRadius - newRadius;
-                        scope.object.position.addScaledVector(dollyDirection, radiusDelta);
-                        scope.object.updateMatrixWorld();
-                        zoomChanged = !!radiusDelta;
-                    } else if (scope.object.isOrthographicCamera) {
-                        // adjust the ortho camera position based on zoom changes
-                        const mouseBefore = new (0, _three.Vector3)(mouse.x, mouse.y, 0);
-                        mouseBefore.unproject(scope.object);
-                        const prevZoom = scope.object.zoom;
-                        scope.object.zoom = Math.max(scope.minZoom, Math.min(scope.maxZoom, scope.object.zoom / scale));
-                        scope.object.updateProjectionMatrix();
-                        zoomChanged = prevZoom !== scope.object.zoom;
-                        const mouseAfter = new (0, _three.Vector3)(mouse.x, mouse.y, 0);
-                        mouseAfter.unproject(scope.object);
-                        scope.object.position.sub(mouseAfter).add(mouseBefore);
-                        scope.object.updateMatrixWorld();
-                        newRadius = offset.length();
-                    } else {
-                        console.warn("WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled.");
-                        scope.zoomToCursor = false;
-                    }
-                    // handle the placement of the target
-                    if (newRadius !== null) {
-                        if (this.screenSpacePanning) // position the orbit target in front of the new camera position
-                        scope.target.set(0, 0, -1).transformDirection(scope.object.matrix).multiplyScalar(newRadius).add(scope.object.position);
-                        else {
-                            // get the ray and translation plane to compute target
-                            _ray.origin.copy(scope.object.position);
-                            _ray.direction.set(0, 0, -1).transformDirection(scope.object.matrix);
-                            // if the camera is 20 degrees above the horizon then don't adjust the focus target to avoid
-                            // extremely large values
-                            if (Math.abs(scope.object.up.dot(_ray.direction)) < TILT_LIMIT) object.lookAt(scope.target);
-                            else {
-                                _plane.setFromNormalAndCoplanarPoint(scope.object.up, scope.target);
-                                _ray.intersectPlane(_plane, scope.target);
-                            }
-                        }
-                    }
-                } else if (scope.object.isOrthographicCamera) {
-                    const prevZoom = scope.object.zoom;
-                    scope.object.zoom = Math.max(scope.minZoom, Math.min(scope.maxZoom, scope.object.zoom / scale));
-                    if (prevZoom !== scope.object.zoom) {
-                        scope.object.updateProjectionMatrix();
-                        zoomChanged = true;
-                    }
-                }
-                scale = 1;
-                performCursorZoom = false;
-                // update condition is:
-                // min(camera displacement, camera rotation in radians)^2 > EPS
-                // using small-angle approximation cos(x/2) = 1 - x^2 / 8
-                if (zoomChanged || lastPosition.distanceToSquared(scope.object.position) > EPS || 8 * (1 - lastQuaternion.dot(scope.object.quaternion)) > EPS || lastTargetPosition.distanceToSquared(scope.target) > EPS) {
-                    scope.dispatchEvent(_changeEvent);
-                    lastPosition.copy(scope.object.position);
-                    lastQuaternion.copy(scope.object.quaternion);
-                    lastTargetPosition.copy(scope.target);
-                    return true;
-                }
-                return false;
-            };
-        }();
-        this.dispose = function() {
-            scope.domElement.removeEventListener("contextmenu", onContextMenu);
-            scope.domElement.removeEventListener("pointerdown", onPointerDown);
-            scope.domElement.removeEventListener("pointercancel", onPointerUp);
-            scope.domElement.removeEventListener("wheel", onMouseWheel);
-            scope.domElement.removeEventListener("pointermove", onPointerMove);
-            scope.domElement.removeEventListener("pointerup", onPointerUp);
-            const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
-            document.removeEventListener("keydown", interceptControlDown, {
-                capture: true
-            });
-            if (scope._domElementKeyEvents !== null) {
-                scope._domElementKeyEvents.removeEventListener("keydown", onKeyDown);
-                scope._domElementKeyEvents = null;
-            }
-        //scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
-        };
-        //
-        // internals
-        //
-        const scope = this;
-        const STATE = {
-            NONE: -1,
-            ROTATE: 0,
-            DOLLY: 1,
-            PAN: 2,
-            TOUCH_ROTATE: 3,
-            TOUCH_PAN: 4,
-            TOUCH_DOLLY_PAN: 5,
-            TOUCH_DOLLY_ROTATE: 6
-        };
-        let state = STATE.NONE;
-        const EPS = 0.000001;
-        // current position in spherical coordinates
-        const spherical = new (0, _three.Spherical)();
-        const sphericalDelta = new (0, _three.Spherical)();
-        let scale = 1;
-        const panOffset = new (0, _three.Vector3)();
-        const rotateStart = new (0, _three.Vector2)();
-        const rotateEnd = new (0, _three.Vector2)();
-        const rotateDelta = new (0, _three.Vector2)();
-        const panStart = new (0, _three.Vector2)();
-        const panEnd = new (0, _three.Vector2)();
-        const panDelta = new (0, _three.Vector2)();
-        const dollyStart = new (0, _three.Vector2)();
-        const dollyEnd = new (0, _three.Vector2)();
-        const dollyDelta = new (0, _three.Vector2)();
-        const dollyDirection = new (0, _three.Vector3)();
-        const mouse = new (0, _three.Vector2)();
-        let performCursorZoom = false;
-        const pointers = [];
-        const pointerPositions = {};
-        let controlActive = false;
-        function getAutoRotationAngle(deltaTime) {
-            if (deltaTime !== null) return 2 * Math.PI / 60 * scope.autoRotateSpeed * deltaTime;
-            else return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
-        }
-        function getZoomScale(delta) {
-            const normalizedDelta = Math.abs(delta * 0.01);
-            return Math.pow(0.95, scope.zoomSpeed * normalizedDelta);
-        }
-        function rotateLeft(angle) {
-            sphericalDelta.theta -= angle;
-        }
-        function rotateUp(angle) {
-            sphericalDelta.phi -= angle;
-        }
-        const panLeft = function() {
-            const v = new (0, _three.Vector3)();
-            return function panLeft(distance, objectMatrix) {
-                v.setFromMatrixColumn(objectMatrix, 0); // get X column of objectMatrix
-                v.multiplyScalar(-distance);
-                panOffset.add(v);
-            };
-        }();
-        const panUp = function() {
-            const v = new (0, _three.Vector3)();
-            return function panUp(distance, objectMatrix) {
-                if (scope.screenSpacePanning === true) v.setFromMatrixColumn(objectMatrix, 1);
-                else {
-                    v.setFromMatrixColumn(objectMatrix, 0);
-                    v.crossVectors(scope.object.up, v);
-                }
-                v.multiplyScalar(distance);
-                panOffset.add(v);
-            };
-        }();
-        // deltaX and deltaY are in pixels; right and down are positive
-        const pan = function() {
-            const offset = new (0, _three.Vector3)();
-            return function pan(deltaX, deltaY) {
-                const element = scope.domElement;
-                if (scope.object.isPerspectiveCamera) {
-                    // perspective
-                    const position = scope.object.position;
-                    offset.copy(position).sub(scope.target);
-                    let targetDistance = offset.length();
-                    // half of the fov is center to top of screen
-                    targetDistance *= Math.tan(scope.object.fov / 2 * Math.PI / 180.0);
-                    // we use only clientHeight here so aspect ratio does not distort speed
-                    panLeft(2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix);
-                    panUp(2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix);
-                } else if (scope.object.isOrthographicCamera) {
-                    // orthographic
-                    panLeft(deltaX * (scope.object.right - scope.object.left) / scope.object.zoom / element.clientWidth, scope.object.matrix);
-                    panUp(deltaY * (scope.object.top - scope.object.bottom) / scope.object.zoom / element.clientHeight, scope.object.matrix);
-                } else {
-                    // camera neither orthographic nor perspective
-                    console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.");
-                    scope.enablePan = false;
-                }
-            };
-        }();
-        function dollyOut(dollyScale) {
-            if (scope.object.isPerspectiveCamera || scope.object.isOrthographicCamera) scale /= dollyScale;
-            else {
-                console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
-                scope.enableZoom = false;
-            }
-        }
-        function dollyIn(dollyScale) {
-            if (scope.object.isPerspectiveCamera || scope.object.isOrthographicCamera) scale *= dollyScale;
-            else {
-                console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
-                scope.enableZoom = false;
-            }
-        }
-        function updateZoomParameters(x, y) {
-            if (!scope.zoomToCursor) return;
-            performCursorZoom = true;
-            const rect = scope.domElement.getBoundingClientRect();
-            const dx = x - rect.left;
-            const dy = y - rect.top;
-            const w = rect.width;
-            const h = rect.height;
-            mouse.x = dx / w * 2 - 1;
-            mouse.y = -(dy / h) * 2 + 1;
-            dollyDirection.set(mouse.x, mouse.y, 1).unproject(scope.object).sub(scope.object.position).normalize();
-        }
-        function clampDistance(dist) {
-            return Math.max(scope.minDistance, Math.min(scope.maxDistance, dist));
-        }
-        //
-        // event callbacks - update the object state
-        //
-        function handleMouseDownRotate(event) {
-            rotateStart.set(event.clientX, event.clientY);
-        }
-        function handleMouseDownDolly(event) {
-            updateZoomParameters(event.clientX, event.clientX);
-            dollyStart.set(event.clientX, event.clientY);
-        }
-        function handleMouseDownPan(event) {
-            panStart.set(event.clientX, event.clientY);
-        }
-        function handleMouseMoveRotate(event) {
-            rotateEnd.set(event.clientX, event.clientY);
-            rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed);
-            const element = scope.domElement;
-            rotateLeft(2 * Math.PI * rotateDelta.x / element.clientHeight); // yes, height
-            rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight);
-            rotateStart.copy(rotateEnd);
-            scope.update();
-        }
-        function handleMouseMoveDolly(event) {
-            dollyEnd.set(event.clientX, event.clientY);
-            dollyDelta.subVectors(dollyEnd, dollyStart);
-            if (dollyDelta.y > 0) dollyOut(getZoomScale(dollyDelta.y));
-            else if (dollyDelta.y < 0) dollyIn(getZoomScale(dollyDelta.y));
-            dollyStart.copy(dollyEnd);
-            scope.update();
-        }
-        function handleMouseMovePan(event) {
-            panEnd.set(event.clientX, event.clientY);
-            panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);
-            pan(panDelta.x, panDelta.y);
-            panStart.copy(panEnd);
-            scope.update();
-        }
-        function handleMouseWheel(event) {
-            updateZoomParameters(event.clientX, event.clientY);
-            if (event.deltaY < 0) dollyIn(getZoomScale(event.deltaY));
-            else if (event.deltaY > 0) dollyOut(getZoomScale(event.deltaY));
-            scope.update();
-        }
-        function handleKeyDown(event) {
-            let needsUpdate = false;
-            switch(event.code){
-                case scope.keys.UP:
-                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateUp(2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
-                    else pan(0, scope.keyPanSpeed);
-                    needsUpdate = true;
-                    break;
-                case scope.keys.BOTTOM:
-                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateUp(-2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
-                    else pan(0, -scope.keyPanSpeed);
-                    needsUpdate = true;
-                    break;
-                case scope.keys.LEFT:
-                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateLeft(2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
-                    else pan(scope.keyPanSpeed, 0);
-                    needsUpdate = true;
-                    break;
-                case scope.keys.RIGHT:
-                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateLeft(-2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
-                    else pan(-scope.keyPanSpeed, 0);
-                    needsUpdate = true;
-                    break;
-            }
-            if (needsUpdate) {
-                // prevent the browser from scrolling on cursor keys
-                event.preventDefault();
-                scope.update();
-            }
-        }
-        function handleTouchStartRotate(event) {
-            if (pointers.length === 1) rotateStart.set(event.pageX, event.pageY);
-            else {
-                const position = getSecondPointerPosition(event);
-                const x = 0.5 * (event.pageX + position.x);
-                const y = 0.5 * (event.pageY + position.y);
-                rotateStart.set(x, y);
-            }
-        }
-        function handleTouchStartPan(event) {
-            if (pointers.length === 1) panStart.set(event.pageX, event.pageY);
-            else {
-                const position = getSecondPointerPosition(event);
-                const x = 0.5 * (event.pageX + position.x);
-                const y = 0.5 * (event.pageY + position.y);
-                panStart.set(x, y);
-            }
-        }
-        function handleTouchStartDolly(event) {
-            const position = getSecondPointerPosition(event);
-            const dx = event.pageX - position.x;
-            const dy = event.pageY - position.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            dollyStart.set(0, distance);
-        }
-        function handleTouchStartDollyPan(event) {
-            if (scope.enableZoom) handleTouchStartDolly(event);
-            if (scope.enablePan) handleTouchStartPan(event);
-        }
-        function handleTouchStartDollyRotate(event) {
-            if (scope.enableZoom) handleTouchStartDolly(event);
-            if (scope.enableRotate) handleTouchStartRotate(event);
-        }
-        function handleTouchMoveRotate(event) {
-            if (pointers.length == 1) rotateEnd.set(event.pageX, event.pageY);
-            else {
-                const position = getSecondPointerPosition(event);
-                const x = 0.5 * (event.pageX + position.x);
-                const y = 0.5 * (event.pageY + position.y);
-                rotateEnd.set(x, y);
-            }
-            rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed);
-            const element = scope.domElement;
-            rotateLeft(2 * Math.PI * rotateDelta.x / element.clientHeight); // yes, height
-            rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight);
-            rotateStart.copy(rotateEnd);
-        }
-        function handleTouchMovePan(event) {
-            if (pointers.length === 1) panEnd.set(event.pageX, event.pageY);
-            else {
-                const position = getSecondPointerPosition(event);
-                const x = 0.5 * (event.pageX + position.x);
-                const y = 0.5 * (event.pageY + position.y);
-                panEnd.set(x, y);
-            }
-            panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);
-            pan(panDelta.x, panDelta.y);
-            panStart.copy(panEnd);
-        }
-        function handleTouchMoveDolly(event) {
-            const position = getSecondPointerPosition(event);
-            const dx = event.pageX - position.x;
-            const dy = event.pageY - position.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            dollyEnd.set(0, distance);
-            dollyDelta.set(0, Math.pow(dollyEnd.y / dollyStart.y, scope.zoomSpeed));
-            dollyOut(dollyDelta.y);
-            dollyStart.copy(dollyEnd);
-            const centerX = (event.pageX + position.x) * 0.5;
-            const centerY = (event.pageY + position.y) * 0.5;
-            updateZoomParameters(centerX, centerY);
-        }
-        function handleTouchMoveDollyPan(event) {
-            if (scope.enableZoom) handleTouchMoveDolly(event);
-            if (scope.enablePan) handleTouchMovePan(event);
-        }
-        function handleTouchMoveDollyRotate(event) {
-            if (scope.enableZoom) handleTouchMoveDolly(event);
-            if (scope.enableRotate) handleTouchMoveRotate(event);
-        }
-        //
-        // event handlers - FSM: listen for events and reset state
-        //
-        function onPointerDown(event) {
-            if (scope.enabled === false) return;
-            if (pointers.length === 0) {
-                scope.domElement.setPointerCapture(event.pointerId);
-                scope.domElement.addEventListener("pointermove", onPointerMove);
-                scope.domElement.addEventListener("pointerup", onPointerUp);
-            }
-            //
-            if (isTrackingPointer(event)) return;
-            //
-            addPointer(event);
-            if (event.pointerType === "touch") onTouchStart(event);
-            else onMouseDown(event);
-        }
-        function onPointerMove(event) {
-            if (scope.enabled === false) return;
-            if (event.pointerType === "touch") onTouchMove(event);
-            else onMouseMove(event);
-        }
-        function onPointerUp(event) {
-            removePointer(event);
-            switch(pointers.length){
-                case 0:
-                    scope.domElement.releasePointerCapture(event.pointerId);
-                    scope.domElement.removeEventListener("pointermove", onPointerMove);
-                    scope.domElement.removeEventListener("pointerup", onPointerUp);
-                    scope.dispatchEvent(_endEvent);
-                    state = STATE.NONE;
-                    break;
-                case 1:
-                    const pointerId = pointers[0];
-                    const position = pointerPositions[pointerId];
-                    // minimal placeholder event - allows state correction on pointer-up
-                    onTouchStart({
-                        pointerId: pointerId,
-                        pageX: position.x,
-                        pageY: position.y
-                    });
-                    break;
-            }
-        }
-        function onMouseDown(event) {
-            let mouseAction;
-            switch(event.button){
-                case 0:
-                    mouseAction = scope.mouseButtons.LEFT;
-                    break;
-                case 1:
-                    mouseAction = scope.mouseButtons.MIDDLE;
-                    break;
-                case 2:
-                    mouseAction = scope.mouseButtons.RIGHT;
-                    break;
-                default:
-                    mouseAction = -1;
-            }
-            switch(mouseAction){
-                case (0, _three.MOUSE).DOLLY:
-                    if (scope.enableZoom === false) return;
-                    handleMouseDownDolly(event);
-                    state = STATE.DOLLY;
-                    break;
-                case (0, _three.MOUSE).ROTATE:
-                    if (event.ctrlKey || event.metaKey || event.shiftKey) {
-                        if (scope.enablePan === false) return;
-                        handleMouseDownPan(event);
-                        state = STATE.PAN;
-                    } else {
-                        if (scope.enableRotate === false) return;
-                        handleMouseDownRotate(event);
-                        state = STATE.ROTATE;
-                    }
-                    break;
-                case (0, _three.MOUSE).PAN:
-                    if (event.ctrlKey || event.metaKey || event.shiftKey) {
-                        if (scope.enableRotate === false) return;
-                        handleMouseDownRotate(event);
-                        state = STATE.ROTATE;
-                    } else {
-                        if (scope.enablePan === false) return;
-                        handleMouseDownPan(event);
-                        state = STATE.PAN;
-                    }
-                    break;
-                default:
-                    state = STATE.NONE;
-            }
-            if (state !== STATE.NONE) scope.dispatchEvent(_startEvent);
-        }
-        function onMouseMove(event) {
-            switch(state){
-                case STATE.ROTATE:
-                    if (scope.enableRotate === false) return;
-                    handleMouseMoveRotate(event);
-                    break;
-                case STATE.DOLLY:
-                    if (scope.enableZoom === false) return;
-                    handleMouseMoveDolly(event);
-                    break;
-                case STATE.PAN:
-                    if (scope.enablePan === false) return;
-                    handleMouseMovePan(event);
-                    break;
-            }
-        }
-        function onMouseWheel(event) {
-            if (scope.enabled === false || scope.enableZoom === false || state !== STATE.NONE) return;
-            event.preventDefault();
-            scope.dispatchEvent(_startEvent);
-            handleMouseWheel(customWheelEvent(event));
-            scope.dispatchEvent(_endEvent);
-        }
-        function customWheelEvent(event) {
-            const mode = event.deltaMode;
-            // minimal wheel event altered to meet delta-zoom demand
-            const newEvent = {
-                clientX: event.clientX,
-                clientY: event.clientY,
-                deltaY: event.deltaY
-            };
-            switch(mode){
-                case 1:
-                    newEvent.deltaY *= 16;
-                    break;
-                case 2:
-                    newEvent.deltaY *= 100;
-                    break;
-            }
-            // detect if event was triggered by pinching
-            if (event.ctrlKey && !controlActive) newEvent.deltaY *= 10;
-            return newEvent;
-        }
-        function interceptControlDown(event) {
-            if (event.key === "Control") {
-                controlActive = true;
-                const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
-                document.addEventListener("keyup", interceptControlUp, {
-                    passive: true,
-                    capture: true
-                });
-            }
-        }
-        function interceptControlUp(event) {
-            if (event.key === "Control") {
-                controlActive = false;
-                const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
-                document.removeEventListener("keyup", interceptControlUp, {
-                    passive: true,
-                    capture: true
-                });
-            }
-        }
-        function onKeyDown(event) {
-            if (scope.enabled === false || scope.enablePan === false) return;
-            handleKeyDown(event);
-        }
-        function onTouchStart(event) {
-            trackPointer(event);
-            switch(pointers.length){
-                case 1:
-                    switch(scope.touches.ONE){
-                        case (0, _three.TOUCH).ROTATE:
-                            if (scope.enableRotate === false) return;
-                            handleTouchStartRotate(event);
-                            state = STATE.TOUCH_ROTATE;
-                            break;
-                        case (0, _three.TOUCH).PAN:
-                            if (scope.enablePan === false) return;
-                            handleTouchStartPan(event);
-                            state = STATE.TOUCH_PAN;
-                            break;
-                        default:
-                            state = STATE.NONE;
-                    }
-                    break;
-                case 2:
-                    switch(scope.touches.TWO){
-                        case (0, _three.TOUCH).DOLLY_PAN:
-                            if (scope.enableZoom === false && scope.enablePan === false) return;
-                            handleTouchStartDollyPan(event);
-                            state = STATE.TOUCH_DOLLY_PAN;
-                            break;
-                        case (0, _three.TOUCH).DOLLY_ROTATE:
-                            if (scope.enableZoom === false && scope.enableRotate === false) return;
-                            handleTouchStartDollyRotate(event);
-                            state = STATE.TOUCH_DOLLY_ROTATE;
-                            break;
-                        default:
-                            state = STATE.NONE;
-                    }
-                    break;
-                default:
-                    state = STATE.NONE;
-            }
-            if (state !== STATE.NONE) scope.dispatchEvent(_startEvent);
-        }
-        function onTouchMove(event) {
-            trackPointer(event);
-            switch(state){
-                case STATE.TOUCH_ROTATE:
-                    if (scope.enableRotate === false) return;
-                    handleTouchMoveRotate(event);
-                    scope.update();
-                    break;
-                case STATE.TOUCH_PAN:
-                    if (scope.enablePan === false) return;
-                    handleTouchMovePan(event);
-                    scope.update();
-                    break;
-                case STATE.TOUCH_DOLLY_PAN:
-                    if (scope.enableZoom === false && scope.enablePan === false) return;
-                    handleTouchMoveDollyPan(event);
-                    scope.update();
-                    break;
-                case STATE.TOUCH_DOLLY_ROTATE:
-                    if (scope.enableZoom === false && scope.enableRotate === false) return;
-                    handleTouchMoveDollyRotate(event);
-                    scope.update();
-                    break;
-                default:
-                    state = STATE.NONE;
-            }
-        }
-        function onContextMenu(event) {
-            if (scope.enabled === false) return;
-            event.preventDefault();
-        }
-        function addPointer(event) {
-            pointers.push(event.pointerId);
-        }
-        function removePointer(event) {
-            delete pointerPositions[event.pointerId];
-            for(let i = 0; i < pointers.length; i++)if (pointers[i] == event.pointerId) {
-                pointers.splice(i, 1);
-                return;
-            }
-        }
-        function isTrackingPointer(event) {
-            for(let i = 0; i < pointers.length; i++){
-                if (pointers[i] == event.pointerId) return true;
-            }
-            return false;
-        }
-        function trackPointer(event) {
-            let position = pointerPositions[event.pointerId];
-            if (position === undefined) {
-                position = new (0, _three.Vector2)();
-                pointerPositions[event.pointerId] = position;
-            }
-            position.set(event.pageX, event.pageY);
-        }
-        function getSecondPointerPosition(event) {
-            const pointerId = event.pointerId === pointers[0] ? pointers[1] : pointers[0];
-            return pointerPositions[pointerId];
-        }
-        //
-        scope.domElement.addEventListener("contextmenu", onContextMenu);
-        scope.domElement.addEventListener("pointerdown", onPointerDown);
-        scope.domElement.addEventListener("pointercancel", onPointerUp);
-        scope.domElement.addEventListener("wheel", onMouseWheel, {
-            passive: false
-        });
-        const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
-        document.addEventListener("keydown", interceptControlDown, {
-            passive: true,
-            capture: true
-        });
-        // force an update at start
-        this.update();
-    }
-}
-
-},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"7JQpJ"}],"k3xQk":[function(require,module,exports) {
+},{}],"k3xQk":[function(require,module,exports) {
 /**
  * dat-gui JavaScript Controller Library
  * https://github.com/dataarts/dat.gui
@@ -35516,6 +34139,1388 @@ var index = {
 };
 exports.default = index;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"7JQpJ"}]},["byhuz","dV6cC"], "dV6cC", "parcelRequire4109")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"7JQpJ"}],"iBAni":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "WebGL", ()=>(0, _webGLJsDefault.default));
+parcelHelpers.export(exports, "Curves", ()=>_curveExtrasJs);
+parcelHelpers.export(exports, "NURBSUtils", ()=>_nurbsutilsJs);
+parcelHelpers.export(exports, "IESSpotLight", ()=>(0, _iesspotLightJsDefault.default));
+parcelHelpers.export(exports, "Water2", ()=>(0, _water2Js.Water));
+parcelHelpers.export(exports, "BokehShader2", ()=>(0, _bokehShader2Js.BokehShader));
+parcelHelpers.export(exports, "BufferGeometryUtils", ()=>_bufferGeometryUtilsJs);
+parcelHelpers.export(exports, "CameraUtils", ()=>_cameraUtilsJs);
+parcelHelpers.export(exports, "GeometryCompressionUtils", ()=>_geometryCompressionUtilsJs);
+parcelHelpers.export(exports, "GeometryUtils", ()=>_geometryUtilsJs);
+parcelHelpers.export(exports, "SceneUtils", ()=>_sceneUtilsJs);
+parcelHelpers.export(exports, "SkeletonUtils", ()=>_skeletonUtilsJs);
+parcelHelpers.export(exports, "SortUtils", ()=>_sortUtilsJs);
+var _animationClipCreatorJs = require("./animation/AnimationClipCreator.js");
+parcelHelpers.exportAll(_animationClipCreatorJs, exports);
+var _ccdiksolverJs = require("./animation/CCDIKSolver.js");
+parcelHelpers.exportAll(_ccdiksolverJs, exports);
+var _mmdanimationHelperJs = require("./animation/MMDAnimationHelper.js");
+parcelHelpers.exportAll(_mmdanimationHelperJs, exports);
+var _mmdphysicsJs = require("./animation/MMDPhysics.js");
+parcelHelpers.exportAll(_mmdphysicsJs, exports);
+var _cinematicCameraJs = require("./cameras/CinematicCamera.js");
+parcelHelpers.exportAll(_cinematicCameraJs, exports);
+var _webGLJs = require("./capabilities/WebGL.js");
+var _webGLJsDefault = parcelHelpers.interopDefault(_webGLJs);
+var _arcballControlsJs = require("./controls/ArcballControls.js");
+parcelHelpers.exportAll(_arcballControlsJs, exports);
+var _dragControlsJs = require("./controls/DragControls.js");
+parcelHelpers.exportAll(_dragControlsJs, exports);
+var _firstPersonControlsJs = require("./controls/FirstPersonControls.js");
+parcelHelpers.exportAll(_firstPersonControlsJs, exports);
+var _flyControlsJs = require("./controls/FlyControls.js");
+parcelHelpers.exportAll(_flyControlsJs, exports);
+var _mapControlsJs = require("./controls/MapControls.js");
+parcelHelpers.exportAll(_mapControlsJs, exports);
+var _orbitControlsJs = require("./controls/OrbitControls.js");
+parcelHelpers.exportAll(_orbitControlsJs, exports);
+var _pointerLockControlsJs = require("./controls/PointerLockControls.js");
+parcelHelpers.exportAll(_pointerLockControlsJs, exports);
+var _trackballControlsJs = require("./controls/TrackballControls.js");
+parcelHelpers.exportAll(_trackballControlsJs, exports);
+var _transformControlsJs = require("./controls/TransformControls.js");
+parcelHelpers.exportAll(_transformControlsJs, exports);
+var _csmJs = require("./csm/CSM.js");
+parcelHelpers.exportAll(_csmJs, exports);
+var _csmfrustumJs = require("./csm/CSMFrustum.js");
+parcelHelpers.exportAll(_csmfrustumJs, exports);
+var _csmhelperJs = require("./csm/CSMHelper.js");
+parcelHelpers.exportAll(_csmhelperJs, exports);
+var _csmshaderJs = require("./csm/CSMShader.js");
+parcelHelpers.exportAll(_csmshaderJs, exports);
+var _curveExtrasJs = require("./curves/CurveExtras.js");
+var _nurbscurveJs = require("./curves/NURBSCurve.js");
+parcelHelpers.exportAll(_nurbscurveJs, exports);
+var _nurbssurfaceJs = require("./curves/NURBSSurface.js");
+parcelHelpers.exportAll(_nurbssurfaceJs, exports);
+var _nurbsvolumeJs = require("./curves/NURBSVolume.js");
+parcelHelpers.exportAll(_nurbsvolumeJs, exports);
+var _nurbsutilsJs = require("./curves/NURBSUtils.js");
+var _anaglyphEffectJs = require("./effects/AnaglyphEffect.js");
+parcelHelpers.exportAll(_anaglyphEffectJs, exports);
+var _asciiEffectJs = require("./effects/AsciiEffect.js");
+parcelHelpers.exportAll(_asciiEffectJs, exports);
+var _outlineEffectJs = require("./effects/OutlineEffect.js");
+parcelHelpers.exportAll(_outlineEffectJs, exports);
+var _parallaxBarrierEffectJs = require("./effects/ParallaxBarrierEffect.js");
+parcelHelpers.exportAll(_parallaxBarrierEffectJs, exports);
+var _peppersGhostEffectJs = require("./effects/PeppersGhostEffect.js");
+parcelHelpers.exportAll(_peppersGhostEffectJs, exports);
+var _stereoEffectJs = require("./effects/StereoEffect.js");
+parcelHelpers.exportAll(_stereoEffectJs, exports);
+var _debugEnvironmentJs = require("./environments/DebugEnvironment.js");
+parcelHelpers.exportAll(_debugEnvironmentJs, exports);
+var _roomEnvironmentJs = require("./environments/RoomEnvironment.js");
+parcelHelpers.exportAll(_roomEnvironmentJs, exports);
+var _dracoexporterJs = require("./exporters/DRACOExporter.js");
+parcelHelpers.exportAll(_dracoexporterJs, exports);
+var _exrexporterJs = require("./exporters/EXRExporter.js");
+parcelHelpers.exportAll(_exrexporterJs, exports);
+var _gltfexporterJs = require("./exporters/GLTFExporter.js");
+parcelHelpers.exportAll(_gltfexporterJs, exports);
+var _ktx2ExporterJs = require("./exporters/KTX2Exporter.js");
+parcelHelpers.exportAll(_ktx2ExporterJs, exports);
+var _mmdexporterJs = require("./exporters/MMDExporter.js");
+parcelHelpers.exportAll(_mmdexporterJs, exports);
+var _objexporterJs = require("./exporters/OBJExporter.js");
+parcelHelpers.exportAll(_objexporterJs, exports);
+var _plyexporterJs = require("./exporters/PLYExporter.js");
+parcelHelpers.exportAll(_plyexporterJs, exports);
+var _stlexporterJs = require("./exporters/STLExporter.js");
+parcelHelpers.exportAll(_stlexporterJs, exports);
+var _usdzexporterJs = require("./exporters/USDZExporter.js");
+parcelHelpers.exportAll(_usdzexporterJs, exports);
+var _boxLineGeometryJs = require("./geometries/BoxLineGeometry.js");
+parcelHelpers.exportAll(_boxLineGeometryJs, exports);
+var _convexGeometryJs = require("./geometries/ConvexGeometry.js");
+parcelHelpers.exportAll(_convexGeometryJs, exports);
+var _decalGeometryJs = require("./geometries/DecalGeometry.js");
+parcelHelpers.exportAll(_decalGeometryJs, exports);
+var _parametricGeometriesJs = require("./geometries/ParametricGeometries.js");
+parcelHelpers.exportAll(_parametricGeometriesJs, exports);
+var _parametricGeometryJs = require("./geometries/ParametricGeometry.js");
+parcelHelpers.exportAll(_parametricGeometryJs, exports);
+var _roundedBoxGeometryJs = require("./geometries/RoundedBoxGeometry.js");
+parcelHelpers.exportAll(_roundedBoxGeometryJs, exports);
+var _teapotGeometryJs = require("./geometries/TeapotGeometry.js");
+parcelHelpers.exportAll(_teapotGeometryJs, exports);
+var _textGeometryJs = require("./geometries/TextGeometry.js");
+parcelHelpers.exportAll(_textGeometryJs, exports);
+var _lightProbeHelperJs = require("./helpers/LightProbeHelper.js");
+parcelHelpers.exportAll(_lightProbeHelperJs, exports);
+var _octreeHelperJs = require("./helpers/OctreeHelper.js");
+parcelHelpers.exportAll(_octreeHelperJs, exports);
+var _positionalAudioHelperJs = require("./helpers/PositionalAudioHelper.js");
+parcelHelpers.exportAll(_positionalAudioHelperJs, exports);
+var _rectAreaLightHelperJs = require("./helpers/RectAreaLightHelper.js");
+parcelHelpers.exportAll(_rectAreaLightHelperJs, exports);
+var _textureHelperJs = require("./helpers/TextureHelper.js");
+parcelHelpers.exportAll(_textureHelperJs, exports);
+var _vertexNormalsHelperJs = require("./helpers/VertexNormalsHelper.js");
+parcelHelpers.exportAll(_vertexNormalsHelperJs, exports);
+var _vertexTangentsHelperJs = require("./helpers/VertexTangentsHelper.js");
+parcelHelpers.exportAll(_vertexTangentsHelperJs, exports);
+var _viewHelperJs = require("./helpers/ViewHelper.js");
+parcelHelpers.exportAll(_viewHelperJs, exports);
+var _htmlmeshJs = require("./interactive/HTMLMesh.js");
+parcelHelpers.exportAll(_htmlmeshJs, exports);
+var _interactiveGroupJs = require("./interactive/InteractiveGroup.js");
+parcelHelpers.exportAll(_interactiveGroupJs, exports);
+var _selectionBoxJs = require("./interactive/SelectionBox.js");
+parcelHelpers.exportAll(_selectionBoxJs, exports);
+var _selectionHelperJs = require("./interactive/SelectionHelper.js");
+parcelHelpers.exportAll(_selectionHelperJs, exports);
+var _iesspotLightJs = require("./lights/IESSpotLight.js");
+var _iesspotLightJsDefault = parcelHelpers.interopDefault(_iesspotLightJs);
+var _lightProbeGeneratorJs = require("./lights/LightProbeGenerator.js");
+parcelHelpers.exportAll(_lightProbeGeneratorJs, exports);
+var _rectAreaLightUniformsLibJs = require("./lights/RectAreaLightUniformsLib.js");
+parcelHelpers.exportAll(_rectAreaLightUniformsLibJs, exports);
+var _line2Js = require("./lines/Line2.js");
+parcelHelpers.exportAll(_line2Js, exports);
+var _lineGeometryJs = require("./lines/LineGeometry.js");
+parcelHelpers.exportAll(_lineGeometryJs, exports);
+var _lineMaterialJs = require("./lines/LineMaterial.js");
+parcelHelpers.exportAll(_lineMaterialJs, exports);
+var _lineSegments2Js = require("./lines/LineSegments2.js");
+parcelHelpers.exportAll(_lineSegments2Js, exports);
+var _lineSegmentsGeometryJs = require("./lines/LineSegmentsGeometry.js");
+parcelHelpers.exportAll(_lineSegmentsGeometryJs, exports);
+var _wireframeJs = require("./lines/Wireframe.js");
+parcelHelpers.exportAll(_wireframeJs, exports);
+var _wireframeGeometry2Js = require("./lines/WireframeGeometry2.js");
+parcelHelpers.exportAll(_wireframeGeometry2Js, exports);
+var _3DmloaderJs = require("./loaders/3DMLoader.js");
+parcelHelpers.exportAll(_3DmloaderJs, exports);
+var _3MfloaderJs = require("./loaders/3MFLoader.js");
+parcelHelpers.exportAll(_3MfloaderJs, exports);
+var _amfloaderJs = require("./loaders/AMFLoader.js");
+parcelHelpers.exportAll(_amfloaderJs, exports);
+var _bvhloaderJs = require("./loaders/BVHLoader.js");
+parcelHelpers.exportAll(_bvhloaderJs, exports);
+var _colladaLoaderJs = require("./loaders/ColladaLoader.js");
+parcelHelpers.exportAll(_colladaLoaderJs, exports);
+var _ddsloaderJs = require("./loaders/DDSLoader.js");
+parcelHelpers.exportAll(_ddsloaderJs, exports);
+var _dracoloaderJs = require("./loaders/DRACOLoader.js");
+parcelHelpers.exportAll(_dracoloaderJs, exports);
+var _exrloaderJs = require("./loaders/EXRLoader.js");
+parcelHelpers.exportAll(_exrloaderJs, exports);
+var _fbxloaderJs = require("./loaders/FBXLoader.js");
+parcelHelpers.exportAll(_fbxloaderJs, exports);
+var _fontLoaderJs = require("./loaders/FontLoader.js");
+parcelHelpers.exportAll(_fontLoaderJs, exports);
+var _gcodeLoaderJs = require("./loaders/GCodeLoader.js");
+parcelHelpers.exportAll(_gcodeLoaderJs, exports);
+var _gltfloaderJs = require("./loaders/GLTFLoader.js");
+parcelHelpers.exportAll(_gltfloaderJs, exports);
+var _hdrcubeTextureLoaderJs = require("./loaders/HDRCubeTextureLoader.js");
+parcelHelpers.exportAll(_hdrcubeTextureLoaderJs, exports);
+var _iesloaderJs = require("./loaders/IESLoader.js");
+parcelHelpers.exportAll(_iesloaderJs, exports);
+var _kmzloaderJs = require("./loaders/KMZLoader.js");
+parcelHelpers.exportAll(_kmzloaderJs, exports);
+var _ktx2LoaderJs = require("./loaders/KTX2Loader.js");
+parcelHelpers.exportAll(_ktx2LoaderJs, exports);
+var _ktxloaderJs = require("./loaders/KTXLoader.js");
+parcelHelpers.exportAll(_ktxloaderJs, exports);
+var _ldrawLoaderJs = require("./loaders/LDrawLoader.js");
+parcelHelpers.exportAll(_ldrawLoaderJs, exports);
+var _lut3DlLoaderJs = require("./loaders/LUT3dlLoader.js");
+parcelHelpers.exportAll(_lut3DlLoaderJs, exports);
+var _lutcubeLoaderJs = require("./loaders/LUTCubeLoader.js");
+parcelHelpers.exportAll(_lutcubeLoaderJs, exports);
+var _lwoloaderJs = require("./loaders/LWOLoader.js");
+parcelHelpers.exportAll(_lwoloaderJs, exports);
+var _logLuvLoaderJs = require("./loaders/LogLuvLoader.js");
+parcelHelpers.exportAll(_logLuvLoaderJs, exports);
+var _lottieLoaderJs = require("./loaders/LottieLoader.js");
+parcelHelpers.exportAll(_lottieLoaderJs, exports);
+var _md2LoaderJs = require("./loaders/MD2Loader.js");
+parcelHelpers.exportAll(_md2LoaderJs, exports);
+var _mddloaderJs = require("./loaders/MDDLoader.js");
+parcelHelpers.exportAll(_mddloaderJs, exports);
+var _mmdloaderJs = require("./loaders/MMDLoader.js");
+parcelHelpers.exportAll(_mmdloaderJs, exports);
+var _mtlloaderJs = require("./loaders/MTLLoader.js");
+parcelHelpers.exportAll(_mtlloaderJs, exports);
+var _nrrdloaderJs = require("./loaders/NRRDLoader.js");
+parcelHelpers.exportAll(_nrrdloaderJs, exports);
+var _objloaderJs = require("./loaders/OBJLoader.js");
+parcelHelpers.exportAll(_objloaderJs, exports);
+var _pcdloaderJs = require("./loaders/PCDLoader.js");
+parcelHelpers.exportAll(_pcdloaderJs, exports);
+var _pdbloaderJs = require("./loaders/PDBLoader.js");
+parcelHelpers.exportAll(_pdbloaderJs, exports);
+var _plyloaderJs = require("./loaders/PLYLoader.js");
+parcelHelpers.exportAll(_plyloaderJs, exports);
+var _pvrloaderJs = require("./loaders/PVRLoader.js");
+parcelHelpers.exportAll(_pvrloaderJs, exports);
+var _rgbeloaderJs = require("./loaders/RGBELoader.js");
+parcelHelpers.exportAll(_rgbeloaderJs, exports);
+var _rgbmloaderJs = require("./loaders/RGBMLoader.js");
+parcelHelpers.exportAll(_rgbmloaderJs, exports);
+var _stlloaderJs = require("./loaders/STLLoader.js");
+parcelHelpers.exportAll(_stlloaderJs, exports);
+var _svgloaderJs = require("./loaders/SVGLoader.js");
+parcelHelpers.exportAll(_svgloaderJs, exports);
+var _tdsloaderJs = require("./loaders/TDSLoader.js");
+parcelHelpers.exportAll(_tdsloaderJs, exports);
+var _tgaloaderJs = require("./loaders/TGALoader.js");
+parcelHelpers.exportAll(_tgaloaderJs, exports);
+var _tiffloaderJs = require("./loaders/TIFFLoader.js");
+parcelHelpers.exportAll(_tiffloaderJs, exports);
+var _ttfloaderJs = require("./loaders/TTFLoader.js");
+parcelHelpers.exportAll(_ttfloaderJs, exports);
+var _tiltLoaderJs = require("./loaders/TiltLoader.js");
+parcelHelpers.exportAll(_tiltLoaderJs, exports);
+var _usdzloaderJs = require("./loaders/USDZLoader.js");
+parcelHelpers.exportAll(_usdzloaderJs, exports);
+var _voxloaderJs = require("./loaders/VOXLoader.js");
+parcelHelpers.exportAll(_voxloaderJs, exports);
+var _vrmlloaderJs = require("./loaders/VRMLLoader.js");
+parcelHelpers.exportAll(_vrmlloaderJs, exports);
+var _vtkloaderJs = require("./loaders/VTKLoader.js");
+parcelHelpers.exportAll(_vtkloaderJs, exports);
+var _xyzloaderJs = require("./loaders/XYZLoader.js");
+parcelHelpers.exportAll(_xyzloaderJs, exports);
+var _meshGouraudMaterialJs = require("./materials/MeshGouraudMaterial.js");
+parcelHelpers.exportAll(_meshGouraudMaterialJs, exports);
+var _capsuleJs = require("./math/Capsule.js");
+parcelHelpers.exportAll(_capsuleJs, exports);
+var _colorConverterJs = require("./math/ColorConverter.js");
+parcelHelpers.exportAll(_colorConverterJs, exports);
+var _convexHullJs = require("./math/ConvexHull.js");
+parcelHelpers.exportAll(_convexHullJs, exports);
+var _improvedNoiseJs = require("./math/ImprovedNoise.js");
+parcelHelpers.exportAll(_improvedNoiseJs, exports);
+var _lutJs = require("./math/Lut.js");
+parcelHelpers.exportAll(_lutJs, exports);
+var _meshSurfaceSamplerJs = require("./math/MeshSurfaceSampler.js");
+parcelHelpers.exportAll(_meshSurfaceSamplerJs, exports);
+var _obbJs = require("./math/OBB.js");
+parcelHelpers.exportAll(_obbJs, exports);
+var _octreeJs = require("./math/Octree.js");
+parcelHelpers.exportAll(_octreeJs, exports);
+var _simplexNoiseJs = require("./math/SimplexNoise.js");
+parcelHelpers.exportAll(_simplexNoiseJs, exports);
+var _convexObjectBreakerJs = require("./misc/ConvexObjectBreaker.js");
+parcelHelpers.exportAll(_convexObjectBreakerJs, exports);
+var _gpucomputationRendererJs = require("./misc/GPUComputationRenderer.js");
+parcelHelpers.exportAll(_gpucomputationRendererJs, exports);
+var _gyroscopeJs = require("./misc/Gyroscope.js");
+parcelHelpers.exportAll(_gyroscopeJs, exports);
+var _md2CharacterJs = require("./misc/MD2Character.js");
+parcelHelpers.exportAll(_md2CharacterJs, exports);
+var _md2CharacterComplexJs = require("./misc/MD2CharacterComplex.js");
+parcelHelpers.exportAll(_md2CharacterComplexJs, exports);
+var _morphAnimMeshJs = require("./misc/MorphAnimMesh.js");
+parcelHelpers.exportAll(_morphAnimMeshJs, exports);
+var _morphBlendMeshJs = require("./misc/MorphBlendMesh.js");
+parcelHelpers.exportAll(_morphBlendMeshJs, exports);
+var _progressiveLightMapJs = require("./misc/ProgressiveLightMap.js");
+parcelHelpers.exportAll(_progressiveLightMapJs, exports);
+var _rollerCoasterJs = require("./misc/RollerCoaster.js");
+parcelHelpers.exportAll(_rollerCoasterJs, exports);
+var _timerJs = require("./misc/Timer.js");
+parcelHelpers.exportAll(_timerJs, exports);
+var _tubePainterJs = require("./misc/TubePainter.js");
+parcelHelpers.exportAll(_tubePainterJs, exports);
+var _volumeJs = require("./misc/Volume.js");
+parcelHelpers.exportAll(_volumeJs, exports);
+var _volumeSliceJs = require("./misc/VolumeSlice.js");
+parcelHelpers.exportAll(_volumeSliceJs, exports);
+var _curveModifierJs = require("./modifiers/CurveModifier.js");
+parcelHelpers.exportAll(_curveModifierJs, exports);
+var _edgeSplitModifierJs = require("./modifiers/EdgeSplitModifier.js");
+parcelHelpers.exportAll(_edgeSplitModifierJs, exports);
+var _simplifyModifierJs = require("./modifiers/SimplifyModifier.js");
+parcelHelpers.exportAll(_simplifyModifierJs, exports);
+var _tessellateModifierJs = require("./modifiers/TessellateModifier.js");
+parcelHelpers.exportAll(_tessellateModifierJs, exports);
+var _groundedSkyboxJs = require("./objects/GroundedSkybox.js");
+parcelHelpers.exportAll(_groundedSkyboxJs, exports);
+var _lensflareJs = require("./objects/Lensflare.js");
+parcelHelpers.exportAll(_lensflareJs, exports);
+var _marchingCubesJs = require("./objects/MarchingCubes.js");
+parcelHelpers.exportAll(_marchingCubesJs, exports);
+var _reflectorJs = require("./objects/Reflector.js");
+parcelHelpers.exportAll(_reflectorJs, exports);
+var _reflectorForSSRPassJs = require("./objects/ReflectorForSSRPass.js");
+parcelHelpers.exportAll(_reflectorForSSRPassJs, exports);
+var _refractorJs = require("./objects/Refractor.js");
+parcelHelpers.exportAll(_refractorJs, exports);
+var _shadowMeshJs = require("./objects/ShadowMesh.js");
+parcelHelpers.exportAll(_shadowMeshJs, exports);
+var _skyJs = require("./objects/Sky.js");
+parcelHelpers.exportAll(_skyJs, exports);
+var _waterJs = require("./objects/Water.js");
+parcelHelpers.exportAll(_waterJs, exports);
+var _water2Js = require("./objects/Water2.js");
+var _ammoPhysicsJs = require("./physics/AmmoPhysics.js");
+parcelHelpers.exportAll(_ammoPhysicsJs, exports);
+var _rapierPhysicsJs = require("./physics/RapierPhysics.js");
+parcelHelpers.exportAll(_rapierPhysicsJs, exports);
+var _afterimagePassJs = require("./postprocessing/AfterimagePass.js");
+parcelHelpers.exportAll(_afterimagePassJs, exports);
+var _bloomPassJs = require("./postprocessing/BloomPass.js");
+parcelHelpers.exportAll(_bloomPassJs, exports);
+var _bokehPassJs = require("./postprocessing/BokehPass.js");
+parcelHelpers.exportAll(_bokehPassJs, exports);
+var _clearPassJs = require("./postprocessing/ClearPass.js");
+parcelHelpers.exportAll(_clearPassJs, exports);
+var _cubeTexturePassJs = require("./postprocessing/CubeTexturePass.js");
+parcelHelpers.exportAll(_cubeTexturePassJs, exports);
+var _dotScreenPassJs = require("./postprocessing/DotScreenPass.js");
+parcelHelpers.exportAll(_dotScreenPassJs, exports);
+var _effectComposerJs = require("./postprocessing/EffectComposer.js");
+parcelHelpers.exportAll(_effectComposerJs, exports);
+var _filmPassJs = require("./postprocessing/FilmPass.js");
+parcelHelpers.exportAll(_filmPassJs, exports);
+var _glitchPassJs = require("./postprocessing/GlitchPass.js");
+parcelHelpers.exportAll(_glitchPassJs, exports);
+var _gtaopassJs = require("./postprocessing/GTAOPass.js");
+parcelHelpers.exportAll(_gtaopassJs, exports);
+var _halftonePassJs = require("./postprocessing/HalftonePass.js");
+parcelHelpers.exportAll(_halftonePassJs, exports);
+var _lutpassJs = require("./postprocessing/LUTPass.js");
+parcelHelpers.exportAll(_lutpassJs, exports);
+var _maskPassJs = require("./postprocessing/MaskPass.js");
+parcelHelpers.exportAll(_maskPassJs, exports);
+var _outlinePassJs = require("./postprocessing/OutlinePass.js");
+parcelHelpers.exportAll(_outlinePassJs, exports);
+var _outputPassJs = require("./postprocessing/OutputPass.js");
+parcelHelpers.exportAll(_outputPassJs, exports);
+var _passJs = require("./postprocessing/Pass.js");
+parcelHelpers.exportAll(_passJs, exports);
+var _renderPassJs = require("./postprocessing/RenderPass.js");
+parcelHelpers.exportAll(_renderPassJs, exports);
+var _renderPixelatedPassJs = require("./postprocessing/RenderPixelatedPass.js");
+parcelHelpers.exportAll(_renderPixelatedPassJs, exports);
+var _saopassJs = require("./postprocessing/SAOPass.js");
+parcelHelpers.exportAll(_saopassJs, exports);
+var _smaapassJs = require("./postprocessing/SMAAPass.js");
+parcelHelpers.exportAll(_smaapassJs, exports);
+var _ssaarenderPassJs = require("./postprocessing/SSAARenderPass.js");
+parcelHelpers.exportAll(_ssaarenderPassJs, exports);
+var _ssaopassJs = require("./postprocessing/SSAOPass.js");
+parcelHelpers.exportAll(_ssaopassJs, exports);
+var _ssrpassJs = require("./postprocessing/SSRPass.js");
+parcelHelpers.exportAll(_ssrpassJs, exports);
+var _savePassJs = require("./postprocessing/SavePass.js");
+parcelHelpers.exportAll(_savePassJs, exports);
+var _shaderPassJs = require("./postprocessing/ShaderPass.js");
+parcelHelpers.exportAll(_shaderPassJs, exports);
+var _taarenderPassJs = require("./postprocessing/TAARenderPass.js");
+parcelHelpers.exportAll(_taarenderPassJs, exports);
+var _texturePassJs = require("./postprocessing/TexturePass.js");
+parcelHelpers.exportAll(_texturePassJs, exports);
+var _unrealBloomPassJs = require("./postprocessing/UnrealBloomPass.js");
+parcelHelpers.exportAll(_unrealBloomPassJs, exports);
+var _css2DrendererJs = require("./renderers/CSS2DRenderer.js");
+parcelHelpers.exportAll(_css2DrendererJs, exports);
+var _css3DrendererJs = require("./renderers/CSS3DRenderer.js");
+parcelHelpers.exportAll(_css3DrendererJs, exports);
+var _projectorJs = require("./renderers/Projector.js");
+parcelHelpers.exportAll(_projectorJs, exports);
+var _svgrendererJs = require("./renderers/SVGRenderer.js");
+parcelHelpers.exportAll(_svgrendererJs, exports);
+var _acesfilmicToneMappingShaderJs = require("./shaders/ACESFilmicToneMappingShader.js");
+parcelHelpers.exportAll(_acesfilmicToneMappingShaderJs, exports);
+var _afterimageShaderJs = require("./shaders/AfterimageShader.js");
+parcelHelpers.exportAll(_afterimageShaderJs, exports);
+var _basicShaderJs = require("./shaders/BasicShader.js");
+parcelHelpers.exportAll(_basicShaderJs, exports);
+var _bleachBypassShaderJs = require("./shaders/BleachBypassShader.js");
+parcelHelpers.exportAll(_bleachBypassShaderJs, exports);
+var _blendShaderJs = require("./shaders/BlendShader.js");
+parcelHelpers.exportAll(_blendShaderJs, exports);
+var _bokehShaderJs = require("./shaders/BokehShader.js");
+parcelHelpers.exportAll(_bokehShaderJs, exports);
+var _bokehShader2Js = require("./shaders/BokehShader2.js");
+var _brightnessContrastShaderJs = require("./shaders/BrightnessContrastShader.js");
+parcelHelpers.exportAll(_brightnessContrastShaderJs, exports);
+var _colorCorrectionShaderJs = require("./shaders/ColorCorrectionShader.js");
+parcelHelpers.exportAll(_colorCorrectionShaderJs, exports);
+var _colorifyShaderJs = require("./shaders/ColorifyShader.js");
+parcelHelpers.exportAll(_colorifyShaderJs, exports);
+var _convolutionShaderJs = require("./shaders/ConvolutionShader.js");
+parcelHelpers.exportAll(_convolutionShaderJs, exports);
+var _copyShaderJs = require("./shaders/CopyShader.js");
+parcelHelpers.exportAll(_copyShaderJs, exports);
+var _dofmipMapShaderJs = require("./shaders/DOFMipMapShader.js");
+parcelHelpers.exportAll(_dofmipMapShaderJs, exports);
+var _depthLimitedBlurShaderJs = require("./shaders/DepthLimitedBlurShader.js");
+parcelHelpers.exportAll(_depthLimitedBlurShaderJs, exports);
+var _digitalGlitchJs = require("./shaders/DigitalGlitch.js");
+parcelHelpers.exportAll(_digitalGlitchJs, exports);
+var _dotScreenShaderJs = require("./shaders/DotScreenShader.js");
+parcelHelpers.exportAll(_dotScreenShaderJs, exports);
+var _exposureShaderJs = require("./shaders/ExposureShader.js");
+parcelHelpers.exportAll(_exposureShaderJs, exports);
+var _fxaashaderJs = require("./shaders/FXAAShader.js");
+parcelHelpers.exportAll(_fxaashaderJs, exports);
+var _filmShaderJs = require("./shaders/FilmShader.js");
+parcelHelpers.exportAll(_filmShaderJs, exports);
+var _focusShaderJs = require("./shaders/FocusShader.js");
+parcelHelpers.exportAll(_focusShaderJs, exports);
+var _freiChenShaderJs = require("./shaders/FreiChenShader.js");
+parcelHelpers.exportAll(_freiChenShaderJs, exports);
+var _gammaCorrectionShaderJs = require("./shaders/GammaCorrectionShader.js");
+parcelHelpers.exportAll(_gammaCorrectionShaderJs, exports);
+var _godRaysShaderJs = require("./shaders/GodRaysShader.js");
+parcelHelpers.exportAll(_godRaysShaderJs, exports);
+var _gtaoshaderJs = require("./shaders/GTAOShader.js");
+parcelHelpers.exportAll(_gtaoshaderJs, exports);
+var _halftoneShaderJs = require("./shaders/HalftoneShader.js");
+parcelHelpers.exportAll(_halftoneShaderJs, exports);
+var _horizontalBlurShaderJs = require("./shaders/HorizontalBlurShader.js");
+parcelHelpers.exportAll(_horizontalBlurShaderJs, exports);
+var _horizontalTiltShiftShaderJs = require("./shaders/HorizontalTiltShiftShader.js");
+parcelHelpers.exportAll(_horizontalTiltShiftShaderJs, exports);
+var _hueSaturationShaderJs = require("./shaders/HueSaturationShader.js");
+parcelHelpers.exportAll(_hueSaturationShaderJs, exports);
+var _kaleidoShaderJs = require("./shaders/KaleidoShader.js");
+parcelHelpers.exportAll(_kaleidoShaderJs, exports);
+var _luminosityHighPassShaderJs = require("./shaders/LuminosityHighPassShader.js");
+parcelHelpers.exportAll(_luminosityHighPassShaderJs, exports);
+var _luminosityShaderJs = require("./shaders/LuminosityShader.js");
+parcelHelpers.exportAll(_luminosityShaderJs, exports);
+var _mmdtoonShaderJs = require("./shaders/MMDToonShader.js");
+parcelHelpers.exportAll(_mmdtoonShaderJs, exports);
+var _mirrorShaderJs = require("./shaders/MirrorShader.js");
+parcelHelpers.exportAll(_mirrorShaderJs, exports);
+var _normalMapShaderJs = require("./shaders/NormalMapShader.js");
+parcelHelpers.exportAll(_normalMapShaderJs, exports);
+var _outputShaderJs = require("./shaders/OutputShader.js");
+parcelHelpers.exportAll(_outputShaderJs, exports);
+var _rgbshiftShaderJs = require("./shaders/RGBShiftShader.js");
+parcelHelpers.exportAll(_rgbshiftShaderJs, exports);
+var _saoshaderJs = require("./shaders/SAOShader.js");
+parcelHelpers.exportAll(_saoshaderJs, exports);
+var _smaashaderJs = require("./shaders/SMAAShader.js");
+parcelHelpers.exportAll(_smaashaderJs, exports);
+var _ssaoshaderJs = require("./shaders/SSAOShader.js");
+parcelHelpers.exportAll(_ssaoshaderJs, exports);
+var _ssrshaderJs = require("./shaders/SSRShader.js");
+parcelHelpers.exportAll(_ssrshaderJs, exports);
+var _sepiaShaderJs = require("./shaders/SepiaShader.js");
+parcelHelpers.exportAll(_sepiaShaderJs, exports);
+var _sobelOperatorShaderJs = require("./shaders/SobelOperatorShader.js");
+parcelHelpers.exportAll(_sobelOperatorShaderJs, exports);
+var _subsurfaceScatteringShaderJs = require("./shaders/SubsurfaceScatteringShader.js");
+parcelHelpers.exportAll(_subsurfaceScatteringShaderJs, exports);
+var _technicolorShaderJs = require("./shaders/TechnicolorShader.js");
+parcelHelpers.exportAll(_technicolorShaderJs, exports);
+var _toonShaderJs = require("./shaders/ToonShader.js");
+parcelHelpers.exportAll(_toonShaderJs, exports);
+var _triangleBlurShaderJs = require("./shaders/TriangleBlurShader.js");
+parcelHelpers.exportAll(_triangleBlurShaderJs, exports);
+var _unpackDepthRGBAShaderJs = require("./shaders/UnpackDepthRGBAShader.js");
+parcelHelpers.exportAll(_unpackDepthRGBAShaderJs, exports);
+var _velocityShaderJs = require("./shaders/VelocityShader.js");
+parcelHelpers.exportAll(_velocityShaderJs, exports);
+var _verticalBlurShaderJs = require("./shaders/VerticalBlurShader.js");
+parcelHelpers.exportAll(_verticalBlurShaderJs, exports);
+var _verticalTiltShiftShaderJs = require("./shaders/VerticalTiltShiftShader.js");
+parcelHelpers.exportAll(_verticalTiltShiftShaderJs, exports);
+var _vignetteShaderJs = require("./shaders/VignetteShader.js");
+parcelHelpers.exportAll(_vignetteShaderJs, exports);
+var _volumeShaderJs = require("./shaders/VolumeShader.js");
+parcelHelpers.exportAll(_volumeShaderJs, exports);
+var _waterRefractionShaderJs = require("./shaders/WaterRefractionShader.js");
+parcelHelpers.exportAll(_waterRefractionShaderJs, exports);
+var _flakesTextureJs = require("./textures/FlakesTexture.js");
+parcelHelpers.exportAll(_flakesTextureJs, exports);
+var _bufferGeometryUtilsJs = require("./utils/BufferGeometryUtils.js");
+var _cameraUtilsJs = require("./utils/CameraUtils.js");
+var _gpustatsPanelJs = require("./utils/GPUStatsPanel.js");
+parcelHelpers.exportAll(_gpustatsPanelJs, exports);
+var _geometryCompressionUtilsJs = require("./utils/GeometryCompressionUtils.js");
+var _geometryUtilsJs = require("./utils/GeometryUtils.js");
+var _ldrawUtilsJs = require("./utils/LDrawUtils.js");
+parcelHelpers.exportAll(_ldrawUtilsJs, exports);
+var _packedPhongMaterialJs = require("./utils/PackedPhongMaterial.js");
+parcelHelpers.exportAll(_packedPhongMaterialJs, exports);
+var _sceneUtilsJs = require("./utils/SceneUtils.js");
+var _shadowMapViewerJs = require("./utils/ShadowMapViewer.js");
+parcelHelpers.exportAll(_shadowMapViewerJs, exports);
+var _skeletonUtilsJs = require("./utils/SkeletonUtils.js");
+var _sortUtilsJs = require("./utils/SortUtils.js");
+var _textureUtilsJs = require("./utils/TextureUtils.js");
+parcelHelpers.exportAll(_textureUtilsJs, exports);
+var _uvsDebugJs = require("./utils/UVsDebug.js");
+parcelHelpers.exportAll(_uvsDebugJs, exports);
+var _workerPoolJs = require("./utils/WorkerPool.js");
+parcelHelpers.exportAll(_workerPoolJs, exports);
+var _arbuttonJs = require("./webxr/ARButton.js");
+parcelHelpers.exportAll(_arbuttonJs, exports);
+var _oculusHandModelJs = require("./webxr/OculusHandModel.js");
+parcelHelpers.exportAll(_oculusHandModelJs, exports);
+var _oculusHandPointerModelJs = require("./webxr/OculusHandPointerModel.js");
+parcelHelpers.exportAll(_oculusHandPointerModelJs, exports);
+var _text2DJs = require("./webxr/Text2D.js");
+parcelHelpers.exportAll(_text2DJs, exports);
+var _vrbuttonJs = require("./webxr/VRButton.js");
+parcelHelpers.exportAll(_vrbuttonJs, exports);
+var _xrbuttonJs = require("./webxr/XRButton.js");
+parcelHelpers.exportAll(_xrbuttonJs, exports);
+var _xrcontrollerModelFactoryJs = require("./webxr/XRControllerModelFactory.js");
+parcelHelpers.exportAll(_xrcontrollerModelFactoryJs, exports);
+var _xrestimatedLightJs = require("./webxr/XREstimatedLight.js");
+parcelHelpers.exportAll(_xrestimatedLightJs, exports);
+var _xrhandMeshModelJs = require("./webxr/XRHandMeshModel.js");
+parcelHelpers.exportAll(_xrhandMeshModelJs, exports);
+var _xrhandModelFactoryJs = require("./webxr/XRHandModelFactory.js");
+parcelHelpers.exportAll(_xrhandModelFactoryJs, exports);
+var _xrhandPrimitiveModelJs = require("./webxr/XRHandPrimitiveModel.js");
+parcelHelpers.exportAll(_xrhandPrimitiveModelJs, exports);
+var _xrplanesJs = require("./webxr/XRPlanes.js");
+parcelHelpers.exportAll(_xrplanesJs, exports);
+
+},{"./animation/AnimationClipCreator.js":false,"./animation/CCDIKSolver.js":false,"./animation/MMDAnimationHelper.js":false,"./animation/MMDPhysics.js":false,"./cameras/CinematicCamera.js":false,"./capabilities/WebGL.js":false,"./controls/ArcballControls.js":false,"./controls/DragControls.js":false,"./controls/FirstPersonControls.js":false,"./controls/FlyControls.js":false,"./controls/MapControls.js":false,"./controls/OrbitControls.js":"7mqRv","./controls/PointerLockControls.js":false,"./controls/TrackballControls.js":false,"./controls/TransformControls.js":false,"./csm/CSM.js":false,"./csm/CSMFrustum.js":false,"./csm/CSMHelper.js":false,"./csm/CSMShader.js":false,"./curves/CurveExtras.js":false,"./curves/NURBSCurve.js":false,"./curves/NURBSSurface.js":false,"./curves/NURBSVolume.js":false,"./curves/NURBSUtils.js":false,"./effects/AnaglyphEffect.js":false,"./effects/AsciiEffect.js":false,"./effects/OutlineEffect.js":false,"./effects/ParallaxBarrierEffect.js":false,"./effects/PeppersGhostEffect.js":false,"./effects/StereoEffect.js":false,"./environments/DebugEnvironment.js":false,"./environments/RoomEnvironment.js":false,"./exporters/DRACOExporter.js":false,"./exporters/EXRExporter.js":false,"./exporters/GLTFExporter.js":false,"./exporters/KTX2Exporter.js":false,"./exporters/MMDExporter.js":false,"./exporters/OBJExporter.js":false,"./exporters/PLYExporter.js":false,"./exporters/STLExporter.js":false,"./exporters/USDZExporter.js":false,"./geometries/BoxLineGeometry.js":false,"./geometries/ConvexGeometry.js":false,"./geometries/DecalGeometry.js":false,"./geometries/ParametricGeometries.js":false,"./geometries/ParametricGeometry.js":false,"./geometries/RoundedBoxGeometry.js":false,"./geometries/TeapotGeometry.js":false,"./geometries/TextGeometry.js":false,"./helpers/LightProbeHelper.js":false,"./helpers/OctreeHelper.js":false,"./helpers/PositionalAudioHelper.js":false,"./helpers/RectAreaLightHelper.js":false,"./helpers/TextureHelper.js":false,"./helpers/VertexNormalsHelper.js":false,"./helpers/VertexTangentsHelper.js":false,"./helpers/ViewHelper.js":false,"./interactive/HTMLMesh.js":false,"./interactive/InteractiveGroup.js":false,"./interactive/SelectionBox.js":false,"./interactive/SelectionHelper.js":false,"./lights/IESSpotLight.js":false,"./lights/LightProbeGenerator.js":false,"./lights/RectAreaLightUniformsLib.js":false,"./lines/Line2.js":false,"./lines/LineGeometry.js":false,"./lines/LineMaterial.js":false,"./lines/LineSegments2.js":false,"./lines/LineSegmentsGeometry.js":false,"./lines/Wireframe.js":false,"./lines/WireframeGeometry2.js":false,"./loaders/3DMLoader.js":false,"./loaders/3MFLoader.js":false,"./loaders/AMFLoader.js":false,"./loaders/BVHLoader.js":false,"./loaders/ColladaLoader.js":false,"./loaders/DDSLoader.js":false,"./loaders/DRACOLoader.js":false,"./loaders/EXRLoader.js":false,"./loaders/FBXLoader.js":false,"./loaders/FontLoader.js":false,"./loaders/GCodeLoader.js":false,"./loaders/GLTFLoader.js":false,"./loaders/HDRCubeTextureLoader.js":false,"./loaders/IESLoader.js":false,"./loaders/KMZLoader.js":false,"./loaders/KTX2Loader.js":false,"./loaders/KTXLoader.js":false,"./loaders/LDrawLoader.js":false,"./loaders/LUT3dlLoader.js":false,"./loaders/LUTCubeLoader.js":false,"./loaders/LWOLoader.js":false,"./loaders/LogLuvLoader.js":false,"./loaders/LottieLoader.js":false,"./loaders/MD2Loader.js":false,"./loaders/MDDLoader.js":false,"./loaders/MMDLoader.js":false,"./loaders/MTLLoader.js":false,"./loaders/NRRDLoader.js":false,"./loaders/OBJLoader.js":false,"./loaders/PCDLoader.js":false,"./loaders/PDBLoader.js":false,"./loaders/PLYLoader.js":false,"./loaders/PVRLoader.js":false,"./loaders/RGBELoader.js":false,"./loaders/RGBMLoader.js":false,"./loaders/STLLoader.js":false,"./loaders/SVGLoader.js":false,"./loaders/TDSLoader.js":false,"./loaders/TGALoader.js":false,"./loaders/TIFFLoader.js":false,"./loaders/TTFLoader.js":false,"./loaders/TiltLoader.js":false,"./loaders/USDZLoader.js":false,"./loaders/VOXLoader.js":false,"./loaders/VRMLLoader.js":false,"./loaders/VTKLoader.js":false,"./loaders/XYZLoader.js":false,"./materials/MeshGouraudMaterial.js":false,"./math/Capsule.js":false,"./math/ColorConverter.js":false,"./math/ConvexHull.js":false,"./math/ImprovedNoise.js":false,"./math/Lut.js":false,"./math/MeshSurfaceSampler.js":false,"./math/OBB.js":false,"./math/Octree.js":false,"./math/SimplexNoise.js":false,"./misc/ConvexObjectBreaker.js":false,"./misc/GPUComputationRenderer.js":false,"./misc/Gyroscope.js":false,"./misc/MD2Character.js":false,"./misc/MD2CharacterComplex.js":false,"./misc/MorphAnimMesh.js":false,"./misc/MorphBlendMesh.js":false,"./misc/ProgressiveLightMap.js":false,"./misc/RollerCoaster.js":false,"./misc/Timer.js":false,"./misc/TubePainter.js":false,"./misc/Volume.js":false,"./misc/VolumeSlice.js":false,"./modifiers/CurveModifier.js":false,"./modifiers/EdgeSplitModifier.js":false,"./modifiers/SimplifyModifier.js":false,"./modifiers/TessellateModifier.js":false,"./objects/GroundedSkybox.js":false,"./objects/Lensflare.js":false,"./objects/MarchingCubes.js":false,"./objects/Reflector.js":false,"./objects/ReflectorForSSRPass.js":false,"./objects/Refractor.js":false,"./objects/ShadowMesh.js":false,"./objects/Sky.js":false,"./objects/Water.js":false,"./objects/Water2.js":false,"./physics/AmmoPhysics.js":false,"./physics/RapierPhysics.js":false,"./postprocessing/AfterimagePass.js":false,"./postprocessing/BloomPass.js":false,"./postprocessing/BokehPass.js":false,"./postprocessing/ClearPass.js":false,"./postprocessing/CubeTexturePass.js":false,"./postprocessing/DotScreenPass.js":false,"./postprocessing/EffectComposer.js":false,"./postprocessing/FilmPass.js":false,"./postprocessing/GlitchPass.js":false,"./postprocessing/GTAOPass.js":false,"./postprocessing/HalftonePass.js":false,"./postprocessing/LUTPass.js":false,"./postprocessing/MaskPass.js":false,"./postprocessing/OutlinePass.js":false,"./postprocessing/OutputPass.js":false,"./postprocessing/Pass.js":false,"./postprocessing/RenderPass.js":false,"./postprocessing/RenderPixelatedPass.js":false,"./postprocessing/SAOPass.js":false,"./postprocessing/SMAAPass.js":false,"./postprocessing/SSAARenderPass.js":false,"./postprocessing/SSAOPass.js":false,"./postprocessing/SSRPass.js":false,"./postprocessing/SavePass.js":false,"./postprocessing/ShaderPass.js":false,"./postprocessing/TAARenderPass.js":false,"./postprocessing/TexturePass.js":false,"./postprocessing/UnrealBloomPass.js":false,"./renderers/CSS2DRenderer.js":false,"./renderers/CSS3DRenderer.js":false,"./renderers/Projector.js":false,"./renderers/SVGRenderer.js":false,"./shaders/ACESFilmicToneMappingShader.js":false,"./shaders/AfterimageShader.js":false,"./shaders/BasicShader.js":false,"./shaders/BleachBypassShader.js":false,"./shaders/BlendShader.js":false,"./shaders/BokehShader.js":false,"./shaders/BokehShader2.js":false,"./shaders/BrightnessContrastShader.js":false,"./shaders/ColorCorrectionShader.js":false,"./shaders/ColorifyShader.js":false,"./shaders/ConvolutionShader.js":false,"./shaders/CopyShader.js":false,"./shaders/DOFMipMapShader.js":false,"./shaders/DepthLimitedBlurShader.js":false,"./shaders/DigitalGlitch.js":false,"./shaders/DotScreenShader.js":false,"./shaders/ExposureShader.js":false,"./shaders/FXAAShader.js":false,"./shaders/FilmShader.js":false,"./shaders/FocusShader.js":false,"./shaders/FreiChenShader.js":false,"./shaders/GammaCorrectionShader.js":false,"./shaders/GodRaysShader.js":false,"./shaders/GTAOShader.js":false,"./shaders/HalftoneShader.js":false,"./shaders/HorizontalBlurShader.js":false,"./shaders/HorizontalTiltShiftShader.js":false,"./shaders/HueSaturationShader.js":false,"./shaders/KaleidoShader.js":false,"./shaders/LuminosityHighPassShader.js":false,"./shaders/LuminosityShader.js":false,"./shaders/MMDToonShader.js":false,"./shaders/MirrorShader.js":false,"./shaders/NormalMapShader.js":false,"./shaders/OutputShader.js":false,"./shaders/RGBShiftShader.js":false,"./shaders/SAOShader.js":false,"./shaders/SMAAShader.js":false,"./shaders/SSAOShader.js":false,"./shaders/SSRShader.js":false,"./shaders/SepiaShader.js":false,"./shaders/SobelOperatorShader.js":false,"./shaders/SubsurfaceScatteringShader.js":false,"./shaders/TechnicolorShader.js":false,"./shaders/ToonShader.js":false,"./shaders/TriangleBlurShader.js":false,"./shaders/UnpackDepthRGBAShader.js":false,"./shaders/VelocityShader.js":false,"./shaders/VerticalBlurShader.js":false,"./shaders/VerticalTiltShiftShader.js":false,"./shaders/VignetteShader.js":false,"./shaders/VolumeShader.js":false,"./shaders/WaterRefractionShader.js":false,"./textures/FlakesTexture.js":false,"./utils/BufferGeometryUtils.js":false,"./utils/CameraUtils.js":false,"./utils/GPUStatsPanel.js":false,"./utils/GeometryCompressionUtils.js":false,"./utils/GeometryUtils.js":false,"./utils/LDrawUtils.js":false,"./utils/PackedPhongMaterial.js":false,"./utils/SceneUtils.js":false,"./utils/ShadowMapViewer.js":false,"./utils/SkeletonUtils.js":false,"./utils/SortUtils.js":false,"./utils/TextureUtils.js":false,"./utils/UVsDebug.js":false,"./utils/WorkerPool.js":false,"./webxr/ARButton.js":false,"./webxr/OculusHandModel.js":false,"./webxr/OculusHandPointerModel.js":false,"./webxr/Text2D.js":false,"./webxr/VRButton.js":false,"./webxr/XRButton.js":false,"./webxr/XRControllerModelFactory.js":false,"./webxr/XREstimatedLight.js":false,"./webxr/XRHandMeshModel.js":false,"./webxr/XRHandModelFactory.js":false,"./webxr/XRHandPrimitiveModel.js":false,"./webxr/XRPlanes.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"7JQpJ"}],"7mqRv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OrbitControls", ()=>OrbitControls);
+var _three = require("three");
+// OrbitControls performs orbiting, dollying (zooming), and panning.
+// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
+//
+//    Orbit - left mouse / touch: one-finger move
+//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
+//    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
+const _changeEvent = {
+    type: "change"
+};
+const _startEvent = {
+    type: "start"
+};
+const _endEvent = {
+    type: "end"
+};
+const _ray = new (0, _three.Ray)();
+const _plane = new (0, _three.Plane)();
+const TILT_LIMIT = Math.cos(70 * (0, _three.MathUtils).DEG2RAD);
+class OrbitControls extends (0, _three.EventDispatcher) {
+    constructor(object, domElement){
+        super();
+        this.object = object;
+        this.domElement = domElement;
+        this.domElement.style.touchAction = "none"; // disable touch scroll
+        // Set to false to disable this control
+        this.enabled = true;
+        // "target" sets the location of focus, where the object orbits around
+        this.target = new (0, _three.Vector3)();
+        // Sets the 3D cursor (similar to Blender), from which the maxTargetRadius takes effect
+        this.cursor = new (0, _three.Vector3)();
+        // How far you can dolly in and out ( PerspectiveCamera only )
+        this.minDistance = 0;
+        this.maxDistance = Infinity;
+        // How far you can zoom in and out ( OrthographicCamera only )
+        this.minZoom = 0;
+        this.maxZoom = Infinity;
+        // Limit camera target within a spherical area around the cursor
+        this.minTargetRadius = 0;
+        this.maxTargetRadius = Infinity;
+        // How far you can orbit vertically, upper and lower limits.
+        // Range is 0 to Math.PI radians.
+        this.minPolarAngle = 0; // radians
+        this.maxPolarAngle = Math.PI; // radians
+        // How far you can orbit horizontally, upper and lower limits.
+        // If set, the interval [ min, max ] must be a sub-interval of [ - 2 PI, 2 PI ], with ( max - min < 2 PI )
+        this.minAzimuthAngle = -Infinity; // radians
+        this.maxAzimuthAngle = Infinity; // radians
+        // Set to true to enable damping (inertia)
+        // If damping is enabled, you must call controls.update() in your animation loop
+        this.enableDamping = false;
+        this.dampingFactor = 0.05;
+        // This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
+        // Set to false to disable zooming
+        this.enableZoom = true;
+        this.zoomSpeed = 1.0;
+        // Set to false to disable rotating
+        this.enableRotate = true;
+        this.rotateSpeed = 1.0;
+        // Set to false to disable panning
+        this.enablePan = true;
+        this.panSpeed = 1.0;
+        this.screenSpacePanning = true; // if false, pan orthogonal to world-space direction camera.up
+        this.keyPanSpeed = 7.0; // pixels moved per arrow key push
+        this.zoomToCursor = false;
+        // Set to true to automatically rotate around the target
+        // If auto-rotate is enabled, you must call controls.update() in your animation loop
+        this.autoRotate = false;
+        this.autoRotateSpeed = 2.0; // 30 seconds per orbit when fps is 60
+        // The four arrow keys
+        this.keys = {
+            LEFT: "ArrowLeft",
+            UP: "ArrowUp",
+            RIGHT: "ArrowRight",
+            BOTTOM: "ArrowDown"
+        };
+        // Mouse buttons
+        this.mouseButtons = {
+            LEFT: (0, _three.MOUSE).ROTATE,
+            MIDDLE: (0, _three.MOUSE).DOLLY,
+            RIGHT: (0, _three.MOUSE).PAN
+        };
+        // Touch fingers
+        this.touches = {
+            ONE: (0, _three.TOUCH).ROTATE,
+            TWO: (0, _three.TOUCH).DOLLY_PAN
+        };
+        // for reset
+        this.target0 = this.target.clone();
+        this.position0 = this.object.position.clone();
+        this.zoom0 = this.object.zoom;
+        // the target DOM element for key events
+        this._domElementKeyEvents = null;
+        //
+        // public methods
+        //
+        this.getPolarAngle = function() {
+            return spherical.phi;
+        };
+        this.getAzimuthalAngle = function() {
+            return spherical.theta;
+        };
+        this.getDistance = function() {
+            return this.object.position.distanceTo(this.target);
+        };
+        this.listenToKeyEvents = function(domElement) {
+            domElement.addEventListener("keydown", onKeyDown);
+            this._domElementKeyEvents = domElement;
+        };
+        this.stopListenToKeyEvents = function() {
+            this._domElementKeyEvents.removeEventListener("keydown", onKeyDown);
+            this._domElementKeyEvents = null;
+        };
+        this.saveState = function() {
+            scope.target0.copy(scope.target);
+            scope.position0.copy(scope.object.position);
+            scope.zoom0 = scope.object.zoom;
+        };
+        this.reset = function() {
+            scope.target.copy(scope.target0);
+            scope.object.position.copy(scope.position0);
+            scope.object.zoom = scope.zoom0;
+            scope.object.updateProjectionMatrix();
+            scope.dispatchEvent(_changeEvent);
+            scope.update();
+            state = STATE.NONE;
+        };
+        // this method is exposed, but perhaps it would be better if we can make it private...
+        this.update = function() {
+            const offset = new (0, _three.Vector3)();
+            // so camera.up is the orbit axis
+            const quat = new (0, _three.Quaternion)().setFromUnitVectors(object.up, new (0, _three.Vector3)(0, 1, 0));
+            const quatInverse = quat.clone().invert();
+            const lastPosition = new (0, _three.Vector3)();
+            const lastQuaternion = new (0, _three.Quaternion)();
+            const lastTargetPosition = new (0, _three.Vector3)();
+            const twoPI = 2 * Math.PI;
+            return function update(deltaTime = null) {
+                const position = scope.object.position;
+                offset.copy(position).sub(scope.target);
+                // rotate offset to "y-axis-is-up" space
+                offset.applyQuaternion(quat);
+                // angle from z-axis around y-axis
+                spherical.setFromVector3(offset);
+                if (scope.autoRotate && state === STATE.NONE) rotateLeft(getAutoRotationAngle(deltaTime));
+                if (scope.enableDamping) {
+                    spherical.theta += sphericalDelta.theta * scope.dampingFactor;
+                    spherical.phi += sphericalDelta.phi * scope.dampingFactor;
+                } else {
+                    spherical.theta += sphericalDelta.theta;
+                    spherical.phi += sphericalDelta.phi;
+                }
+                // restrict theta to be between desired limits
+                let min = scope.minAzimuthAngle;
+                let max = scope.maxAzimuthAngle;
+                if (isFinite(min) && isFinite(max)) {
+                    if (min < -Math.PI) min += twoPI;
+                    else if (min > Math.PI) min -= twoPI;
+                    if (max < -Math.PI) max += twoPI;
+                    else if (max > Math.PI) max -= twoPI;
+                    if (min <= max) spherical.theta = Math.max(min, Math.min(max, spherical.theta));
+                    else spherical.theta = spherical.theta > (min + max) / 2 ? Math.max(min, spherical.theta) : Math.min(max, spherical.theta);
+                }
+                // restrict phi to be between desired limits
+                spherical.phi = Math.max(scope.minPolarAngle, Math.min(scope.maxPolarAngle, spherical.phi));
+                spherical.makeSafe();
+                // move target to panned location
+                if (scope.enableDamping === true) scope.target.addScaledVector(panOffset, scope.dampingFactor);
+                else scope.target.add(panOffset);
+                // Limit the target distance from the cursor to create a sphere around the center of interest
+                scope.target.sub(scope.cursor);
+                scope.target.clampLength(scope.minTargetRadius, scope.maxTargetRadius);
+                scope.target.add(scope.cursor);
+                let zoomChanged = false;
+                // adjust the camera position based on zoom only if we're not zooming to the cursor or if it's an ortho camera
+                // we adjust zoom later in these cases
+                if (scope.zoomToCursor && performCursorZoom || scope.object.isOrthographicCamera) spherical.radius = clampDistance(spherical.radius);
+                else {
+                    const prevRadius = spherical.radius;
+                    spherical.radius = clampDistance(spherical.radius * scale);
+                    zoomChanged = prevRadius != spherical.radius;
+                }
+                offset.setFromSpherical(spherical);
+                // rotate offset back to "camera-up-vector-is-up" space
+                offset.applyQuaternion(quatInverse);
+                position.copy(scope.target).add(offset);
+                scope.object.lookAt(scope.target);
+                if (scope.enableDamping === true) {
+                    sphericalDelta.theta *= 1 - scope.dampingFactor;
+                    sphericalDelta.phi *= 1 - scope.dampingFactor;
+                    panOffset.multiplyScalar(1 - scope.dampingFactor);
+                } else {
+                    sphericalDelta.set(0, 0, 0);
+                    panOffset.set(0, 0, 0);
+                }
+                // adjust camera position
+                if (scope.zoomToCursor && performCursorZoom) {
+                    let newRadius = null;
+                    if (scope.object.isPerspectiveCamera) {
+                        // move the camera down the pointer ray
+                        // this method avoids floating point error
+                        const prevRadius = offset.length();
+                        newRadius = clampDistance(prevRadius * scale);
+                        const radiusDelta = prevRadius - newRadius;
+                        scope.object.position.addScaledVector(dollyDirection, radiusDelta);
+                        scope.object.updateMatrixWorld();
+                        zoomChanged = !!radiusDelta;
+                    } else if (scope.object.isOrthographicCamera) {
+                        // adjust the ortho camera position based on zoom changes
+                        const mouseBefore = new (0, _three.Vector3)(mouse.x, mouse.y, 0);
+                        mouseBefore.unproject(scope.object);
+                        const prevZoom = scope.object.zoom;
+                        scope.object.zoom = Math.max(scope.minZoom, Math.min(scope.maxZoom, scope.object.zoom / scale));
+                        scope.object.updateProjectionMatrix();
+                        zoomChanged = prevZoom !== scope.object.zoom;
+                        const mouseAfter = new (0, _three.Vector3)(mouse.x, mouse.y, 0);
+                        mouseAfter.unproject(scope.object);
+                        scope.object.position.sub(mouseAfter).add(mouseBefore);
+                        scope.object.updateMatrixWorld();
+                        newRadius = offset.length();
+                    } else {
+                        console.warn("WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled.");
+                        scope.zoomToCursor = false;
+                    }
+                    // handle the placement of the target
+                    if (newRadius !== null) {
+                        if (this.screenSpacePanning) // position the orbit target in front of the new camera position
+                        scope.target.set(0, 0, -1).transformDirection(scope.object.matrix).multiplyScalar(newRadius).add(scope.object.position);
+                        else {
+                            // get the ray and translation plane to compute target
+                            _ray.origin.copy(scope.object.position);
+                            _ray.direction.set(0, 0, -1).transformDirection(scope.object.matrix);
+                            // if the camera is 20 degrees above the horizon then don't adjust the focus target to avoid
+                            // extremely large values
+                            if (Math.abs(scope.object.up.dot(_ray.direction)) < TILT_LIMIT) object.lookAt(scope.target);
+                            else {
+                                _plane.setFromNormalAndCoplanarPoint(scope.object.up, scope.target);
+                                _ray.intersectPlane(_plane, scope.target);
+                            }
+                        }
+                    }
+                } else if (scope.object.isOrthographicCamera) {
+                    const prevZoom = scope.object.zoom;
+                    scope.object.zoom = Math.max(scope.minZoom, Math.min(scope.maxZoom, scope.object.zoom / scale));
+                    if (prevZoom !== scope.object.zoom) {
+                        scope.object.updateProjectionMatrix();
+                        zoomChanged = true;
+                    }
+                }
+                scale = 1;
+                performCursorZoom = false;
+                // update condition is:
+                // min(camera displacement, camera rotation in radians)^2 > EPS
+                // using small-angle approximation cos(x/2) = 1 - x^2 / 8
+                if (zoomChanged || lastPosition.distanceToSquared(scope.object.position) > EPS || 8 * (1 - lastQuaternion.dot(scope.object.quaternion)) > EPS || lastTargetPosition.distanceToSquared(scope.target) > EPS) {
+                    scope.dispatchEvent(_changeEvent);
+                    lastPosition.copy(scope.object.position);
+                    lastQuaternion.copy(scope.object.quaternion);
+                    lastTargetPosition.copy(scope.target);
+                    return true;
+                }
+                return false;
+            };
+        }();
+        this.dispose = function() {
+            scope.domElement.removeEventListener("contextmenu", onContextMenu);
+            scope.domElement.removeEventListener("pointerdown", onPointerDown);
+            scope.domElement.removeEventListener("pointercancel", onPointerUp);
+            scope.domElement.removeEventListener("wheel", onMouseWheel);
+            scope.domElement.removeEventListener("pointermove", onPointerMove);
+            scope.domElement.removeEventListener("pointerup", onPointerUp);
+            const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
+            document.removeEventListener("keydown", interceptControlDown, {
+                capture: true
+            });
+            if (scope._domElementKeyEvents !== null) {
+                scope._domElementKeyEvents.removeEventListener("keydown", onKeyDown);
+                scope._domElementKeyEvents = null;
+            }
+        //scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
+        };
+        //
+        // internals
+        //
+        const scope = this;
+        const STATE = {
+            NONE: -1,
+            ROTATE: 0,
+            DOLLY: 1,
+            PAN: 2,
+            TOUCH_ROTATE: 3,
+            TOUCH_PAN: 4,
+            TOUCH_DOLLY_PAN: 5,
+            TOUCH_DOLLY_ROTATE: 6
+        };
+        let state = STATE.NONE;
+        const EPS = 0.000001;
+        // current position in spherical coordinates
+        const spherical = new (0, _three.Spherical)();
+        const sphericalDelta = new (0, _three.Spherical)();
+        let scale = 1;
+        const panOffset = new (0, _three.Vector3)();
+        const rotateStart = new (0, _three.Vector2)();
+        const rotateEnd = new (0, _three.Vector2)();
+        const rotateDelta = new (0, _three.Vector2)();
+        const panStart = new (0, _three.Vector2)();
+        const panEnd = new (0, _three.Vector2)();
+        const panDelta = new (0, _three.Vector2)();
+        const dollyStart = new (0, _three.Vector2)();
+        const dollyEnd = new (0, _three.Vector2)();
+        const dollyDelta = new (0, _three.Vector2)();
+        const dollyDirection = new (0, _three.Vector3)();
+        const mouse = new (0, _three.Vector2)();
+        let performCursorZoom = false;
+        const pointers = [];
+        const pointerPositions = {};
+        let controlActive = false;
+        function getAutoRotationAngle(deltaTime) {
+            if (deltaTime !== null) return 2 * Math.PI / 60 * scope.autoRotateSpeed * deltaTime;
+            else return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
+        }
+        function getZoomScale(delta) {
+            const normalizedDelta = Math.abs(delta * 0.01);
+            return Math.pow(0.95, scope.zoomSpeed * normalizedDelta);
+        }
+        function rotateLeft(angle) {
+            sphericalDelta.theta -= angle;
+        }
+        function rotateUp(angle) {
+            sphericalDelta.phi -= angle;
+        }
+        const panLeft = function() {
+            const v = new (0, _three.Vector3)();
+            return function panLeft(distance, objectMatrix) {
+                v.setFromMatrixColumn(objectMatrix, 0); // get X column of objectMatrix
+                v.multiplyScalar(-distance);
+                panOffset.add(v);
+            };
+        }();
+        const panUp = function() {
+            const v = new (0, _three.Vector3)();
+            return function panUp(distance, objectMatrix) {
+                if (scope.screenSpacePanning === true) v.setFromMatrixColumn(objectMatrix, 1);
+                else {
+                    v.setFromMatrixColumn(objectMatrix, 0);
+                    v.crossVectors(scope.object.up, v);
+                }
+                v.multiplyScalar(distance);
+                panOffset.add(v);
+            };
+        }();
+        // deltaX and deltaY are in pixels; right and down are positive
+        const pan = function() {
+            const offset = new (0, _three.Vector3)();
+            return function pan(deltaX, deltaY) {
+                const element = scope.domElement;
+                if (scope.object.isPerspectiveCamera) {
+                    // perspective
+                    const position = scope.object.position;
+                    offset.copy(position).sub(scope.target);
+                    let targetDistance = offset.length();
+                    // half of the fov is center to top of screen
+                    targetDistance *= Math.tan(scope.object.fov / 2 * Math.PI / 180.0);
+                    // we use only clientHeight here so aspect ratio does not distort speed
+                    panLeft(2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix);
+                    panUp(2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix);
+                } else if (scope.object.isOrthographicCamera) {
+                    // orthographic
+                    panLeft(deltaX * (scope.object.right - scope.object.left) / scope.object.zoom / element.clientWidth, scope.object.matrix);
+                    panUp(deltaY * (scope.object.top - scope.object.bottom) / scope.object.zoom / element.clientHeight, scope.object.matrix);
+                } else {
+                    // camera neither orthographic nor perspective
+                    console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.");
+                    scope.enablePan = false;
+                }
+            };
+        }();
+        function dollyOut(dollyScale) {
+            if (scope.object.isPerspectiveCamera || scope.object.isOrthographicCamera) scale /= dollyScale;
+            else {
+                console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
+                scope.enableZoom = false;
+            }
+        }
+        function dollyIn(dollyScale) {
+            if (scope.object.isPerspectiveCamera || scope.object.isOrthographicCamera) scale *= dollyScale;
+            else {
+                console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
+                scope.enableZoom = false;
+            }
+        }
+        function updateZoomParameters(x, y) {
+            if (!scope.zoomToCursor) return;
+            performCursorZoom = true;
+            const rect = scope.domElement.getBoundingClientRect();
+            const dx = x - rect.left;
+            const dy = y - rect.top;
+            const w = rect.width;
+            const h = rect.height;
+            mouse.x = dx / w * 2 - 1;
+            mouse.y = -(dy / h) * 2 + 1;
+            dollyDirection.set(mouse.x, mouse.y, 1).unproject(scope.object).sub(scope.object.position).normalize();
+        }
+        function clampDistance(dist) {
+            return Math.max(scope.minDistance, Math.min(scope.maxDistance, dist));
+        }
+        //
+        // event callbacks - update the object state
+        //
+        function handleMouseDownRotate(event) {
+            rotateStart.set(event.clientX, event.clientY);
+        }
+        function handleMouseDownDolly(event) {
+            updateZoomParameters(event.clientX, event.clientX);
+            dollyStart.set(event.clientX, event.clientY);
+        }
+        function handleMouseDownPan(event) {
+            panStart.set(event.clientX, event.clientY);
+        }
+        function handleMouseMoveRotate(event) {
+            rotateEnd.set(event.clientX, event.clientY);
+            rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed);
+            const element = scope.domElement;
+            rotateLeft(2 * Math.PI * rotateDelta.x / element.clientHeight); // yes, height
+            rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight);
+            rotateStart.copy(rotateEnd);
+            scope.update();
+        }
+        function handleMouseMoveDolly(event) {
+            dollyEnd.set(event.clientX, event.clientY);
+            dollyDelta.subVectors(dollyEnd, dollyStart);
+            if (dollyDelta.y > 0) dollyOut(getZoomScale(dollyDelta.y));
+            else if (dollyDelta.y < 0) dollyIn(getZoomScale(dollyDelta.y));
+            dollyStart.copy(dollyEnd);
+            scope.update();
+        }
+        function handleMouseMovePan(event) {
+            panEnd.set(event.clientX, event.clientY);
+            panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);
+            pan(panDelta.x, panDelta.y);
+            panStart.copy(panEnd);
+            scope.update();
+        }
+        function handleMouseWheel(event) {
+            updateZoomParameters(event.clientX, event.clientY);
+            if (event.deltaY < 0) dollyIn(getZoomScale(event.deltaY));
+            else if (event.deltaY > 0) dollyOut(getZoomScale(event.deltaY));
+            scope.update();
+        }
+        function handleKeyDown(event) {
+            let needsUpdate = false;
+            switch(event.code){
+                case scope.keys.UP:
+                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateUp(2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
+                    else pan(0, scope.keyPanSpeed);
+                    needsUpdate = true;
+                    break;
+                case scope.keys.BOTTOM:
+                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateUp(-2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
+                    else pan(0, -scope.keyPanSpeed);
+                    needsUpdate = true;
+                    break;
+                case scope.keys.LEFT:
+                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateLeft(2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
+                    else pan(scope.keyPanSpeed, 0);
+                    needsUpdate = true;
+                    break;
+                case scope.keys.RIGHT:
+                    if (event.ctrlKey || event.metaKey || event.shiftKey) rotateLeft(-2 * Math.PI * scope.rotateSpeed / scope.domElement.clientHeight);
+                    else pan(-scope.keyPanSpeed, 0);
+                    needsUpdate = true;
+                    break;
+            }
+            if (needsUpdate) {
+                // prevent the browser from scrolling on cursor keys
+                event.preventDefault();
+                scope.update();
+            }
+        }
+        function handleTouchStartRotate(event) {
+            if (pointers.length === 1) rotateStart.set(event.pageX, event.pageY);
+            else {
+                const position = getSecondPointerPosition(event);
+                const x = 0.5 * (event.pageX + position.x);
+                const y = 0.5 * (event.pageY + position.y);
+                rotateStart.set(x, y);
+            }
+        }
+        function handleTouchStartPan(event) {
+            if (pointers.length === 1) panStart.set(event.pageX, event.pageY);
+            else {
+                const position = getSecondPointerPosition(event);
+                const x = 0.5 * (event.pageX + position.x);
+                const y = 0.5 * (event.pageY + position.y);
+                panStart.set(x, y);
+            }
+        }
+        function handleTouchStartDolly(event) {
+            const position = getSecondPointerPosition(event);
+            const dx = event.pageX - position.x;
+            const dy = event.pageY - position.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            dollyStart.set(0, distance);
+        }
+        function handleTouchStartDollyPan(event) {
+            if (scope.enableZoom) handleTouchStartDolly(event);
+            if (scope.enablePan) handleTouchStartPan(event);
+        }
+        function handleTouchStartDollyRotate(event) {
+            if (scope.enableZoom) handleTouchStartDolly(event);
+            if (scope.enableRotate) handleTouchStartRotate(event);
+        }
+        function handleTouchMoveRotate(event) {
+            if (pointers.length == 1) rotateEnd.set(event.pageX, event.pageY);
+            else {
+                const position = getSecondPointerPosition(event);
+                const x = 0.5 * (event.pageX + position.x);
+                const y = 0.5 * (event.pageY + position.y);
+                rotateEnd.set(x, y);
+            }
+            rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed);
+            const element = scope.domElement;
+            rotateLeft(2 * Math.PI * rotateDelta.x / element.clientHeight); // yes, height
+            rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight);
+            rotateStart.copy(rotateEnd);
+        }
+        function handleTouchMovePan(event) {
+            if (pointers.length === 1) panEnd.set(event.pageX, event.pageY);
+            else {
+                const position = getSecondPointerPosition(event);
+                const x = 0.5 * (event.pageX + position.x);
+                const y = 0.5 * (event.pageY + position.y);
+                panEnd.set(x, y);
+            }
+            panDelta.subVectors(panEnd, panStart).multiplyScalar(scope.panSpeed);
+            pan(panDelta.x, panDelta.y);
+            panStart.copy(panEnd);
+        }
+        function handleTouchMoveDolly(event) {
+            const position = getSecondPointerPosition(event);
+            const dx = event.pageX - position.x;
+            const dy = event.pageY - position.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            dollyEnd.set(0, distance);
+            dollyDelta.set(0, Math.pow(dollyEnd.y / dollyStart.y, scope.zoomSpeed));
+            dollyOut(dollyDelta.y);
+            dollyStart.copy(dollyEnd);
+            const centerX = (event.pageX + position.x) * 0.5;
+            const centerY = (event.pageY + position.y) * 0.5;
+            updateZoomParameters(centerX, centerY);
+        }
+        function handleTouchMoveDollyPan(event) {
+            if (scope.enableZoom) handleTouchMoveDolly(event);
+            if (scope.enablePan) handleTouchMovePan(event);
+        }
+        function handleTouchMoveDollyRotate(event) {
+            if (scope.enableZoom) handleTouchMoveDolly(event);
+            if (scope.enableRotate) handleTouchMoveRotate(event);
+        }
+        //
+        // event handlers - FSM: listen for events and reset state
+        //
+        function onPointerDown(event) {
+            if (scope.enabled === false) return;
+            if (pointers.length === 0) {
+                scope.domElement.setPointerCapture(event.pointerId);
+                scope.domElement.addEventListener("pointermove", onPointerMove);
+                scope.domElement.addEventListener("pointerup", onPointerUp);
+            }
+            //
+            if (isTrackingPointer(event)) return;
+            //
+            addPointer(event);
+            if (event.pointerType === "touch") onTouchStart(event);
+            else onMouseDown(event);
+        }
+        function onPointerMove(event) {
+            if (scope.enabled === false) return;
+            if (event.pointerType === "touch") onTouchMove(event);
+            else onMouseMove(event);
+        }
+        function onPointerUp(event) {
+            removePointer(event);
+            switch(pointers.length){
+                case 0:
+                    scope.domElement.releasePointerCapture(event.pointerId);
+                    scope.domElement.removeEventListener("pointermove", onPointerMove);
+                    scope.domElement.removeEventListener("pointerup", onPointerUp);
+                    scope.dispatchEvent(_endEvent);
+                    state = STATE.NONE;
+                    break;
+                case 1:
+                    const pointerId = pointers[0];
+                    const position = pointerPositions[pointerId];
+                    // minimal placeholder event - allows state correction on pointer-up
+                    onTouchStart({
+                        pointerId: pointerId,
+                        pageX: position.x,
+                        pageY: position.y
+                    });
+                    break;
+            }
+        }
+        function onMouseDown(event) {
+            let mouseAction;
+            switch(event.button){
+                case 0:
+                    mouseAction = scope.mouseButtons.LEFT;
+                    break;
+                case 1:
+                    mouseAction = scope.mouseButtons.MIDDLE;
+                    break;
+                case 2:
+                    mouseAction = scope.mouseButtons.RIGHT;
+                    break;
+                default:
+                    mouseAction = -1;
+            }
+            switch(mouseAction){
+                case (0, _three.MOUSE).DOLLY:
+                    if (scope.enableZoom === false) return;
+                    handleMouseDownDolly(event);
+                    state = STATE.DOLLY;
+                    break;
+                case (0, _three.MOUSE).ROTATE:
+                    if (event.ctrlKey || event.metaKey || event.shiftKey) {
+                        if (scope.enablePan === false) return;
+                        handleMouseDownPan(event);
+                        state = STATE.PAN;
+                    } else {
+                        if (scope.enableRotate === false) return;
+                        handleMouseDownRotate(event);
+                        state = STATE.ROTATE;
+                    }
+                    break;
+                case (0, _three.MOUSE).PAN:
+                    if (event.ctrlKey || event.metaKey || event.shiftKey) {
+                        if (scope.enableRotate === false) return;
+                        handleMouseDownRotate(event);
+                        state = STATE.ROTATE;
+                    } else {
+                        if (scope.enablePan === false) return;
+                        handleMouseDownPan(event);
+                        state = STATE.PAN;
+                    }
+                    break;
+                default:
+                    state = STATE.NONE;
+            }
+            if (state !== STATE.NONE) scope.dispatchEvent(_startEvent);
+        }
+        function onMouseMove(event) {
+            switch(state){
+                case STATE.ROTATE:
+                    if (scope.enableRotate === false) return;
+                    handleMouseMoveRotate(event);
+                    break;
+                case STATE.DOLLY:
+                    if (scope.enableZoom === false) return;
+                    handleMouseMoveDolly(event);
+                    break;
+                case STATE.PAN:
+                    if (scope.enablePan === false) return;
+                    handleMouseMovePan(event);
+                    break;
+            }
+        }
+        function onMouseWheel(event) {
+            if (scope.enabled === false || scope.enableZoom === false || state !== STATE.NONE) return;
+            event.preventDefault();
+            scope.dispatchEvent(_startEvent);
+            handleMouseWheel(customWheelEvent(event));
+            scope.dispatchEvent(_endEvent);
+        }
+        function customWheelEvent(event) {
+            const mode = event.deltaMode;
+            // minimal wheel event altered to meet delta-zoom demand
+            const newEvent = {
+                clientX: event.clientX,
+                clientY: event.clientY,
+                deltaY: event.deltaY
+            };
+            switch(mode){
+                case 1:
+                    newEvent.deltaY *= 16;
+                    break;
+                case 2:
+                    newEvent.deltaY *= 100;
+                    break;
+            }
+            // detect if event was triggered by pinching
+            if (event.ctrlKey && !controlActive) newEvent.deltaY *= 10;
+            return newEvent;
+        }
+        function interceptControlDown(event) {
+            if (event.key === "Control") {
+                controlActive = true;
+                const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
+                document.addEventListener("keyup", interceptControlUp, {
+                    passive: true,
+                    capture: true
+                });
+            }
+        }
+        function interceptControlUp(event) {
+            if (event.key === "Control") {
+                controlActive = false;
+                const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
+                document.removeEventListener("keyup", interceptControlUp, {
+                    passive: true,
+                    capture: true
+                });
+            }
+        }
+        function onKeyDown(event) {
+            if (scope.enabled === false || scope.enablePan === false) return;
+            handleKeyDown(event);
+        }
+        function onTouchStart(event) {
+            trackPointer(event);
+            switch(pointers.length){
+                case 1:
+                    switch(scope.touches.ONE){
+                        case (0, _three.TOUCH).ROTATE:
+                            if (scope.enableRotate === false) return;
+                            handleTouchStartRotate(event);
+                            state = STATE.TOUCH_ROTATE;
+                            break;
+                        case (0, _three.TOUCH).PAN:
+                            if (scope.enablePan === false) return;
+                            handleTouchStartPan(event);
+                            state = STATE.TOUCH_PAN;
+                            break;
+                        default:
+                            state = STATE.NONE;
+                    }
+                    break;
+                case 2:
+                    switch(scope.touches.TWO){
+                        case (0, _three.TOUCH).DOLLY_PAN:
+                            if (scope.enableZoom === false && scope.enablePan === false) return;
+                            handleTouchStartDollyPan(event);
+                            state = STATE.TOUCH_DOLLY_PAN;
+                            break;
+                        case (0, _three.TOUCH).DOLLY_ROTATE:
+                            if (scope.enableZoom === false && scope.enableRotate === false) return;
+                            handleTouchStartDollyRotate(event);
+                            state = STATE.TOUCH_DOLLY_ROTATE;
+                            break;
+                        default:
+                            state = STATE.NONE;
+                    }
+                    break;
+                default:
+                    state = STATE.NONE;
+            }
+            if (state !== STATE.NONE) scope.dispatchEvent(_startEvent);
+        }
+        function onTouchMove(event) {
+            trackPointer(event);
+            switch(state){
+                case STATE.TOUCH_ROTATE:
+                    if (scope.enableRotate === false) return;
+                    handleTouchMoveRotate(event);
+                    scope.update();
+                    break;
+                case STATE.TOUCH_PAN:
+                    if (scope.enablePan === false) return;
+                    handleTouchMovePan(event);
+                    scope.update();
+                    break;
+                case STATE.TOUCH_DOLLY_PAN:
+                    if (scope.enableZoom === false && scope.enablePan === false) return;
+                    handleTouchMoveDollyPan(event);
+                    scope.update();
+                    break;
+                case STATE.TOUCH_DOLLY_ROTATE:
+                    if (scope.enableZoom === false && scope.enableRotate === false) return;
+                    handleTouchMoveDollyRotate(event);
+                    scope.update();
+                    break;
+                default:
+                    state = STATE.NONE;
+            }
+        }
+        function onContextMenu(event) {
+            if (scope.enabled === false) return;
+            event.preventDefault();
+        }
+        function addPointer(event) {
+            pointers.push(event.pointerId);
+        }
+        function removePointer(event) {
+            delete pointerPositions[event.pointerId];
+            for(let i = 0; i < pointers.length; i++)if (pointers[i] == event.pointerId) {
+                pointers.splice(i, 1);
+                return;
+            }
+        }
+        function isTrackingPointer(event) {
+            for(let i = 0; i < pointers.length; i++){
+                if (pointers[i] == event.pointerId) return true;
+            }
+            return false;
+        }
+        function trackPointer(event) {
+            let position = pointerPositions[event.pointerId];
+            if (position === undefined) {
+                position = new (0, _three.Vector2)();
+                pointerPositions[event.pointerId] = position;
+            }
+            position.set(event.pageX, event.pageY);
+        }
+        function getSecondPointerPosition(event) {
+            const pointerId = event.pointerId === pointers[0] ? pointers[1] : pointers[0];
+            return pointerPositions[pointerId];
+        }
+        //
+        scope.domElement.addEventListener("contextmenu", onContextMenu);
+        scope.domElement.addEventListener("pointerdown", onPointerDown);
+        scope.domElement.addEventListener("pointercancel", onPointerUp);
+        scope.domElement.addEventListener("wheel", onMouseWheel, {
+            passive: false
+        });
+        const document = scope.domElement.getRootNode(); // offscreen canvas compatibility
+        document.addEventListener("keydown", interceptControlDown, {
+            passive: true,
+            capture: true
+        });
+        // force an update at start
+        this.update();
+    }
+}
+
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"7JQpJ"}]},["byhuz","dV6cC"], "dV6cC", "parcelRequire4109")
 
 //# sourceMappingURL=index.e82f28a0.js.map
